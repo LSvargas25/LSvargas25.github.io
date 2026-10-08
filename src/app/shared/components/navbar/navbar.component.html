@@ -141,7 +141,7 @@
       [attr.aria-label]="lang.labelKey | translate"
       [attr.aria-pressed]="currentLang === lang.code"
       [attr.title]="lang.labelKey | translate">
-      <span class="flag" aria-hidden="true">{{ lang.flag }}</span>
+      <img class="flag" [src]="lang.flag" width="18" height="12" alt="" aria-hidden="true" />
       <span class="lang-code">{{ lang.code | uppercase }}</span>
     </button>
   </div>

@@ -583,7 +583,10 @@
           "Dashboard with total balance, the month's income and expenses, and active investments",
           "Multi-user sign-up and login (JWT): each user sees only their own data",
           "API documentation with Swagger"
-        ]
+        ],
+        "demo": {
+          "access": "Create a free account to try it."
+        }
       }
     }
   },

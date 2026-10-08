@@ -214,12 +214,13 @@ describe('CaseStudyComponent', () => {
       .toBe('Sistema en producción; el código pertenece a Soluciones Expande.');
   });
 
-  it('gives Mis Finanzas a single code button and no demo (no public demo instance)', async () => {
+  it('gives Mis Finanzas a live demo and a single code button', async () => {
     await render('finanzas');
     expect(links().map(a => [a.href, a.textContent!.replace(/\s+/g, ' ').trim()])).toEqual([
+      ['https://widget-finanzas.onrender.com/', 'Ver demo (se abre en una pestaña nueva)'],
       ['https://github.com/LSvargas25/widget-finanzas', 'Código (se abre en una pestaña nueva)']
     ]);
-    expect(el.querySelector('.cs-note')).toBeNull();
+    expect(el.querySelector('.cs-note')).not.toBeNull();
     expect(el.querySelector('#cs-testing')).toBeNull();
     // every decision in this project carries its reason after the colon
     el.querySelectorAll('.cs-decision').forEach(d => expect(d.querySelector('.cs-decision-detail')).not.toBeNull());

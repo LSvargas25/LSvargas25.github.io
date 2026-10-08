@@ -102,8 +102,13 @@
 }
 
 .flag {
-  font-size: 1rem;
-  line-height: 1;
+  display: block;
+  flex-shrink: 0;
+  width: 18px;
+  height: 12px;
+  border-radius: 2px;
+  /* thin edge so the white stripes don't melt into the button */
+  box-shadow: 0 0 0 0.5px rgba(60, 50, 42, 0.35);
 }
 
 .lang-code {

@@ -262,6 +262,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
     techIcons: [TECH.python, TECH.fastapi, TECH.postgresql, TECH.javascript],
     taglineKey: `${item('finanzas')}.tagline`,
     highlights: [
+      LIVE_DEMO,
       fact('smartphone', `${item('finanzas')}.highlights.pwa`),
       fact('code',       `${item('finanzas')}.highlights.python`),
       fact('github',     `${item('finanzas')}.highlights.openSource`)
@@ -287,6 +288,11 @@ export const PROJECTS: ProjectCaseStudy[] = [
     featuresKey:  `${item('finanzas')}.features`,
     featureIcons: ['wallet', 'circle-plus', 'trending-up', 'layout-dashboard', 'users', 'file-code'],
     links: {
+      demo: {
+        url: 'https://widget-finanzas.onrender.com/',
+        coldStart: true,
+        accessKey: `${item('finanzas')}.demo.access`
+      },
       repo: 'https://github.com/LSvargas25/widget-finanzas'
     }
   },

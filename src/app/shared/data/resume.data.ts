@@ -30,8 +30,8 @@ export const RESUME_DATA: ResumeData = {
       url: 'https://github.com/LSvargas25'
     },
     linkedin: {
-      label: 'linkedin.com/in/luis-steven-vargas-rodriguez',
-      url: 'https://www.linkedin.com/in/luis-steven-vargas-rodriguez-1b0221199/'
+      label: 'linkedin.com/in/luis-steven-vargas-rodríguez',
+      url: 'https://www.linkedin.com/in/luis-steven-vargas-rodr%C3%ADguez/'
     }
   },
 

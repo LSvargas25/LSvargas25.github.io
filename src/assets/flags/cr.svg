@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12">
+  <!-- Costa Rica: blue, white, red (double), white, blue = 1:1:2:1:1 -->
+  <rect width="18" height="12" fill="#002B7F"/>
+  <rect y="2" width="18" height="8" fill="#FFFFFF"/>
+  <rect y="4" width="18" height="4" fill="#CE1126"/>
+</svg>
