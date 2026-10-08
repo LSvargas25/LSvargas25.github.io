@@ -56,7 +56,7 @@ describe('ProjectsComponent', () => {
     const cards = originals();
     cards.forEach(card => expect(card.querySelector('.card-image-wrap img')).not.toBeNull());
     expect(cards.filter(c => c.querySelector('.card-live-badge')).map(name))
-      .toEqual(['LvBuild', 'FitRos', 'Pokedex']);
+      .toEqual(['LvBuild', 'FitRos', 'Mis Finanzas', 'Pokedex']);
   });
 
   it('gives public projects demo / code buttons and private ones a "private code" label', () => {
@@ -66,7 +66,7 @@ describe('ProjectsComponent', () => {
     expect(links('LvBuild')).toEqual(['https://lvbuild-web.onrender.com', 'https://github.com/LSvargas25/LvBuild']);
     expect(links('FitRos')).toEqual(['https://fitros-web.onrender.com', 'https://github.com/LSvargas25/fitros-api']);
     expect(links('Pokedex')).toEqual(['https://pokedex-frontend-md48.onrender.com', 'https://github.com/LSvargas25/pokedex-frontend']);
-    expect(links('Mis Finanzas')).toEqual(['https://github.com/LSvargas25/widget-finanzas']);
+    expect(links('Mis Finanzas')).toEqual(['https://widget-finanzas.onrender.com/', 'https://github.com/LSvargas25/widget-finanzas']);
     expect(cards.filter(c => c.querySelector('.card-private')).map(name)).toEqual(['Expande', 'FitHouse', 'VCBikeService']);
   });
 

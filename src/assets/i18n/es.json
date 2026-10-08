@@ -583,7 +583,10 @@
           "Panel con saldo total, ingresos y gastos del mes e inversiones activas",
           "Multiusuario con registro e inicio de sesión (JWT): cada usuario ve solo sus datos",
           "Documentación de la API con Swagger"
-        ]
+        ],
+        "demo": {
+          "access": "Crea una cuenta gratis para probarla."
+        }
       }
     }
   },

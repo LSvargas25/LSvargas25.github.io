@@ -6,6 +6,7 @@ import { ResumeSheetService } from '../../services/resume-sheet.service';
 import { FullPageScrollService } from '../../services/full-page-scroll.service';
 import { LANG_STORAGE_KEY } from '../../../core/language';
 
+/** `flag`: SVG in assets/flags (emoji flags don't render on Windows) */
 type NavbarLanguage = { code: 'es' | 'en'; flag: string; labelKey: string };
 
 @Component({
@@ -31,8 +32,8 @@ export class NavbarComponent implements OnInit {
   readonly sections = this.fullPage.sections;
 
   languages: NavbarLanguage[] = [
-    { code: 'es', flag: '🇨🇷', labelKey: 'nav.lang.es' },
-    { code: 'en', flag: '🇺🇸', labelKey: 'nav.lang.en' }
+    { code: 'es', flag: 'assets/flags/cr.svg', labelKey: 'nav.lang.es' },
+    { code: 'en', flag: 'assets/flags/us.svg', labelKey: 'nav.lang.en' }
   ];
 
   currentLang: 'es' | 'en' = 'es';
