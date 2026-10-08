@@ -66,7 +66,23 @@
   "experience": {
     "title": "Experience",
     "education": "Education",
-    "work": "Work"
+    "work": "Work experience",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "logoAlt": "{{company}} logo",
+    "jobs": {
+      "expande": {
+        "highlights": [
+          "Develop and maintain the company’s production management system.",
+          "Stack: ASP.NET Core, Angular and SQL Server.",
+          "Inventory per warehouse, point of sale, purchasing, invoicing and project modules.",
+          "Price quotations, expense tracking and investment/cost reporting.",
+          "On-site support for houses, buildings and terraces alongside architecture teams.",
+          "Customer service and administrative support.",
+          "Applied that business knowledge to designing an internal tool (see Projects)."
+        ]
+      }
+    }
   },
   "projects": {
     "title": "Projects",
@@ -92,11 +108,10 @@
       "finanzas": {
         "description": "Personal finance app installable on your phone (PWA): accounts, expenses, income, investments and loans, with a Python and FastAPI backend."
       },
-      "demoBadge": "Demo",
-      "shotAlt": "Screenshot of the {{name}} demo",
       "tryDemo": "Try the demo",
       "viewCode": "View code",
-      "coldStartNote": "The demos run on free servers: the first load can take up to 1 minute."
+      "coldStartNote": "The demos run on free servers: the first load can take up to 1 minute.",
+      "liveBadge": "Live demo"
     },
     "carousel": {
       "prev": "Scroll left",

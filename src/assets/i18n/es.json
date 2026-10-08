@@ -66,7 +66,23 @@
   "experience": {
     "title": "Experiencia",
     "education": "Educación",
-    "work": "Trabajo"
+    "work": "Experiencia laboral",
+    "showMore": "Ver más",
+    "showLess": "Ver menos",
+    "logoAlt": "Logo de {{company}}",
+    "jobs": {
+      "expande": {
+        "highlights": [
+          "Desarrollo y mantenimiento del sistema de gestión en producción de la empresa.",
+          "Stack: ASP.NET Core, Angular y SQL Server.",
+          "Módulos de inventario por bodega, punto de venta, compras, facturación y proyectos.",
+          "Cotizaciones, control de gastos e informes de inversión y costos.",
+          "Apoyo en obras (casas, edificios, terrazas) con equipos de arquitectura.",
+          "Atención al cliente y soporte administrativo.",
+          "Conocimiento del negocio aplicado al diseño de una herramienta interna (ver Proyectos)."
+        ]
+      }
+    }
   },
   "projects": {
     "title": "Proyectos",
@@ -92,11 +108,10 @@
       "finanzas": {
         "description": "App de finanzas personales instalable en el celular (PWA): cuentas, gastos, ingresos, inversiones y préstamos, con backend en Python y FastAPI."
       },
-      "demoBadge": "Demo",
-      "shotAlt": "Captura de la demo de {{name}}",
       "tryDemo": "Probar demo",
       "viewCode": "Ver código",
-      "coldStartNote": "Las demos usan servidores gratuitos: la primera carga puede tardar hasta 1 minuto."
+      "coldStartNote": "Las demos usan servidores gratuitos: la primera carga puede tardar hasta 1 minuto.",
+      "liveBadge": "Demo en vivo"
     },
     "carousel": {
       "prev": "Desplazar a la izquierda",

@@ -4,7 +4,7 @@ import { provideClientHydration, withEventReplay, withIncrementalHydration } fro
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LucideAngularModule, Instagram, ChevronLeft, ChevronRight } from 'lucide-angular';
+import { LucideAngularModule, Instagram, ChevronLeft, ChevronRight, ChevronDown, Briefcase, MapPin } from 'lucide-angular';
 // Registered at the root: Angular HMR cannot resolve imported values in a component's providers
 import { CASE_STUDY_ICONS } from './shared/components/Projects/case-study/case-study.icons';
 
@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay(), withIncrementalHydration()),
     provideHttpClient(withFetch()),
     importProvidersFrom(
-      LucideAngularModule.pick({ Instagram, ChevronLeft, ChevronRight, ...CASE_STUDY_ICONS }),
+      LucideAngularModule.pick({ Instagram, ChevronLeft, ChevronRight, ChevronDown, Briefcase, MapPin, ...CASE_STUDY_ICONS }),
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,

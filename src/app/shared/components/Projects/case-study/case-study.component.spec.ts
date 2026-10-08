@@ -116,19 +116,19 @@ describe('CaseStudyComponent', () => {
     }
   });
 
-  it('uses the LvBuild logo, edge to edge, in the header and keeps the dashboard as the hero image', async () => {
+  it('uses the LvBuild app icon, padded, in the header and keeps the dashboard as the hero image', async () => {
     await render('lvbuild');
     const avatar = el.querySelector<HTMLElement>('.cs-avatar')!;
     const logo = avatar.querySelector('img')!;
-    expect(logo.getAttribute('src')).toBe('assets/images/lvbuild-icon.webp');
+    expect(logo.getAttribute('src')).toBe('assets/images/lvbuild-app-icon.svg');
     expect(logo.alt).toBe('Logo de LvBuild');
-    expect(avatar.classList).toContain('cs-avatar--fill');
+    expect(avatar.classList).toContain('cs-avatar--pad');
     expect(el.querySelector('.cs-hero img')!.getAttribute('src')).toBe('assets/images/demo-lvbuild-1200.webp');
 
     TestBed.resetTestingModule();
     await render('fitros');
-    expect(el.querySelector('.cs-avatar img')!.getAttribute('alt')).toBe('FitRos');
-    expect(el.querySelector('.cs-avatar')!.classList).not.toContain('cs-avatar--fill');
+    expect(el.querySelector('.cs-avatar img')!.getAttribute('src')).toBe('assets/images/fitros-app-logo.webp');
+    expect(el.querySelector('.cs-avatar')!.classList).toContain('cs-avatar--fill');
   });
 
   it('renders the key facts under the tagline', async () => {
@@ -214,13 +214,12 @@ describe('CaseStudyComponent', () => {
       .toBe('Sistema en producción; el código pertenece a Soluciones Expande.');
   });
 
-  it('gives Mis Finanzas a live demo and a single code button', async () => {
+  it('gives Mis Finanzas a single code button and no demo (no public demo instance)', async () => {
     await render('finanzas');
     expect(links().map(a => [a.href, a.textContent!.replace(/\s+/g, ' ').trim()])).toEqual([
-      ['https://widget-finanzas.onrender.com/', 'Ver demo (se abre en una pestaña nueva)'],
       ['https://github.com/LSvargas25/widget-finanzas', 'Código (se abre en una pestaña nueva)']
     ]);
-    expect(el.querySelector('.cs-note')).not.toBeNull();
+    expect(el.querySelector('.cs-note')).toBeNull();
     expect(el.querySelector('#cs-testing')).toBeNull();
     // every decision in this project carries its reason after the colon
     el.querySelectorAll('.cs-decision').forEach(d => expect(d.querySelector('.cs-decision-detail')).not.toBeNull());

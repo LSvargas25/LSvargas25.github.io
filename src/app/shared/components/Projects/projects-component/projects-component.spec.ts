@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { importProvidersFrom } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { LucideAngularModule, ChevronLeft, ChevronRight, Clock, Github, Play } from 'lucide-angular';
+import { LucideAngularModule, ChevronLeft, ChevronRight, Clock, Github, Lock, Play } from 'lucide-angular';
 
 import { ProjectsComponent } from './projects-component';
 
@@ -12,7 +12,7 @@ describe('ProjectsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProjectsComponent, TranslateModule.forRoot()],
-      providers: [importProvidersFrom(LucideAngularModule.pick({ ChevronLeft, ChevronRight, Clock, Github, Play }))]
+      providers: [importProvidersFrom(LucideAngularModule.pick({ ChevronLeft, ChevronRight, Clock, Github, Lock, Play }))]
     })
     .compileComponents();
 
@@ -21,6 +21,10 @@ describe('ProjectsComponent', () => {
     fixture.detectChanges();
     await fixture.whenStable();
   });
+
+  const originals = () => (Array.from(fixture.nativeElement.querySelectorAll('.project-card')) as HTMLElement[])
+    .slice(0, component.projects.length);
+  const name = (card: HTMLElement) => card.querySelector('.card-open')!.textContent!.trim();
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -48,21 +52,22 @@ describe('ProjectsComponent', () => {
     expect(component.selectedProject?.id).toBe('expande');
   });
 
-  it('shows screenshot, demo and code buttons only on the LvBuild, FitRos and Pokedex cards', () => {
-    const cards: HTMLElement[] = Array.from(fixture.nativeElement.querySelectorAll('.project-card'))
-      .slice(0, component.projects.length) as HTMLElement[];
-    const withDemo = cards
-      .filter(card => card.querySelector('.card-shot img') && card.querySelector('.card-actions'))
-      .map(card => card.querySelector('.card-open')!.textContent!.trim());
-    expect(withDemo).toEqual(['LvBuild', 'FitRos', 'Pokedex']);
+  it('shows the logo on every card and the "Live demo" badge only where there is a demo', () => {
+    const cards = originals();
+    cards.forEach(card => expect(card.querySelector('.card-image-wrap img')).not.toBeNull());
+    expect(cards.filter(c => c.querySelector('.card-live-badge')).map(name))
+      .toEqual(['LvBuild', 'FitRos', 'Pokedex']);
+  });
 
-    const links = (name: string) => {
-      const card = cards.find(c => c.querySelector('.card-open')!.textContent!.trim() === name)!;
-      return Array.from(card.querySelectorAll('.card-actions a')).map(a => a.getAttribute('href'));
-    };
+  it('gives public projects demo / code buttons and private ones a "private code" label', () => {
+    const cards = originals();
+    const links = (n: string) => Array.from(cards.find(c => name(c) === n)!.querySelectorAll('.card-actions a'))
+      .map(a => a.getAttribute('href'));
     expect(links('LvBuild')).toEqual(['https://lvbuild-web.onrender.com', 'https://github.com/LSvargas25/LvBuild']);
     expect(links('FitRos')).toEqual(['https://fitros-web.onrender.com', 'https://github.com/LSvargas25/fitros-api']);
     expect(links('Pokedex')).toEqual(['https://pokedex-frontend-md48.onrender.com', 'https://github.com/LSvargas25/pokedex-frontend']);
+    expect(links('Mis Finanzas')).toEqual(['https://github.com/LSvargas25/widget-finanzas']);
+    expect(cards.filter(c => c.querySelector('.card-private')).map(name)).toEqual(['Expande', 'FitHouse', 'VCBikeService']);
   });
 
   it('does not open the case study when a demo or code link is clicked', () => {
