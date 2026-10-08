@@ -93,11 +93,10 @@ export const PROJECTS: ProjectCaseStudy[] = [
   {
     id: 'lvbuild',
     name: 'LvBuild',
-    // Circular terracotta logo; the dashboard screenshot stays as the hero image
-    cardImage: 'assets/images/lvbuild-icon.webp',
+    // App icon from the LvBuild login (square), padded inside the white circle
+    cardImage: 'assets/images/lvbuild-app-icon.svg',
     cardImageAltKey: `${item('lvbuild')}.logoAlt`,
-    cardImageFill: true,
-    cardShot: 'assets/images/demo-lvbuild-640.webp',
+    cardImagePad: true,
     heroImage: 'assets/images/demo-lvbuild-1200.webp',
     glowClass: 'lvbuild-glow',
     // Mean terracotta of the logo, so card glow and modal accents match it
@@ -158,8 +157,8 @@ export const PROJECTS: ProjectCaseStudy[] = [
   {
     id: 'fitros',
     name: 'FitRos',
-    cardImage: 'assets/images/fitros-logo.webp',
-    cardShot: 'assets/images/demo-fitros-640.webp',
+    cardImage: 'assets/images/fitros-app-logo.webp',
+    cardImageFill: true,
     heroImage: 'assets/images/demo-fitros-1200.webp',
     glowClass: 'fitros-glow',
     accentRgb: '34, 197, 94',
@@ -263,7 +262,6 @@ export const PROJECTS: ProjectCaseStudy[] = [
     techIcons: [TECH.python, TECH.fastapi, TECH.postgresql, TECH.javascript],
     taglineKey: `${item('finanzas')}.tagline`,
     highlights: [
-      LIVE_DEMO,
       fact('smartphone', `${item('finanzas')}.highlights.pwa`),
       fact('code',       `${item('finanzas')}.highlights.python`),
       fact('github',     `${item('finanzas')}.highlights.openSource`)
@@ -289,7 +287,6 @@ export const PROJECTS: ProjectCaseStudy[] = [
     featuresKey:  `${item('finanzas')}.features`,
     featureIcons: ['wallet', 'circle-plus', 'trending-up', 'layout-dashboard', 'users', 'file-code'],
     links: {
-      demo: { url: 'https://widget-finanzas.onrender.com', coldStart: true },
       repo: 'https://github.com/LSvargas25/widget-finanzas'
     }
   },
@@ -298,7 +295,6 @@ export const PROJECTS: ProjectCaseStudy[] = [
     id: 'pokedex',
     name: 'Pokedex',
     cardImage: 'assets/images/Pokedex.png',
-    cardShot: 'assets/images/demo-pokedex-640.webp',
     heroImage: 'assets/images/demo-pokedex-1200.webp',
     glowClass: 'pokedex-glow',
     accentRgb: '220, 50, 50',

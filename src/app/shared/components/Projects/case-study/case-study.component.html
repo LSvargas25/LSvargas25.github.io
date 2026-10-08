@@ -2,7 +2,7 @@
 
   <!-- ================= HEADER ================= -->
   <header class="cs-header" appScrollReveal [scrollRevealOnce]="true">
-    <div class="cs-avatar {{ project.glowClass }}" [class.cs-avatar--fill]="project.cardImageFill">
+    <div class="cs-avatar {{ project.glowClass }}" [class.cs-avatar--fill]="project.cardImageFill" [class.cs-avatar--pad]="project.cardImagePad">
       <img [src]="project.cardImage"
            [alt]="project.cardImageAltKey ? (project.cardImageAltKey | translate) : project.name" />
     </div>

@@ -29,7 +29,6 @@
           @for (project of projects; track project.id) {
             <div class="project-card"
                  [class.is-clone]="set === 1"
-                 [class.project-card--demo]="project.cardShot"
                  [attr.aria-hidden]="set === 1 ? 'true' : null"
                  [style.--card-rgb]="project.accentRgb"
                  (click)="onCardClick(project)"
@@ -37,19 +36,13 @@
                  (focusout)="onCardBlur()"
                  (pointerenter)="onCardMouseEnter($event)"
                  (pointerleave)="onCardMouseLeave()">
-              @if (project.cardShot) {
-                <div class="card-shot">
-                  <img loading="lazy" [src]="project.cardShot" width="640" height="400"
-                       [alt]="'projects.cards.shotAlt' | translate: { name: project.name }" />
-                  <span class="card-demo-badge">{{ 'projects.cards.demoBadge' | translate }}</span>
-                </div>
-              } @else {
-                <div class="card-image-wrap {{ project.glowClass }}" [class.card-image-wrap--fill]="project.cardImageFill">
-                  <img loading="lazy" [src]="project.cardImage"
-                       [alt]="project.cardImageAltKey ? (project.cardImageAltKey | translate) : project.name"
-                       class="card-img" />
-                </div>
-              }
+              <div class="card-image-wrap {{ project.glowClass }}"
+                   [class.card-image-wrap--fill]="project.cardImageFill"
+                   [class.card-image-wrap--pad]="project.cardImagePad">
+                <img loading="lazy" [src]="project.cardImage" width="160" height="160"
+                     [alt]="project.cardImageAltKey ? (project.cardImageAltKey | translate) : project.name"
+                     class="card-img" />
+              </div>
               <h3 class="card-title">
                 <button type="button" class="card-open"
                         [attr.tabindex]="set === 0 ? 0 : -1"
@@ -57,9 +50,15 @@
                         [attr.aria-label]="'projects.caseStudy.open' | translate: { name: project.name }">
                   {{ project.name }}
                 </button>
+                @if (project.links.demo) {
+                  <span class="card-live-badge">
+                    <span class="card-live-dot" aria-hidden="true"></span>
+                    {{ 'projects.cards.liveBadge' | translate }}
+                  </span>
+                }
               </h3>
               <p class="card-desc">{{ project.cardDescriptionKey | translate }}</p>
-              @if (project.cardShot && project.links.demo; as demo) {
+              @if (project.links.demo; as demo) {
                 @if (demo.accessKey) {
                   <p class="card-demo-line card-demo-line--access">{{ demo.accessKey | translate }}</p>
                 }
@@ -67,31 +66,42 @@
                   <p class="card-demo-line">{{ demo.noteKey | translate }}</p>
                 }
               }
-              <div class="tech-row">
-                @for (tech of project.techIcons; track tech.name) {
-                  <img loading="lazy" [src]="tech.icon" [alt]="tech.name" [title]="tech.name" class="tech-icon" />
-                }
-              </div>
-              @if (project.cardShot && project.links.demo; as demo) {
-                <div class="card-actions">
-                  <a class="card-btn card-btn--primary" [href]="demo.url" target="_blank" rel="noopener noreferrer"
-                     [attr.tabindex]="set === 0 ? null : -1"
-                     (click)="$event.stopPropagation()">
-                    <lucide-icon name="play" [size]="14" aria-hidden="true"></lucide-icon>
-                    {{ 'projects.cards.tryDemo' | translate }}
-                    <span class="sr-only">— {{ project.name }} ({{ 'projects.caseStudy.newTab' | translate }})</span>
-                  </a>
-                  @if (codeUrl(project); as code) {
-                    <a class="card-btn" [href]="code" target="_blank" rel="noopener noreferrer"
-                       [attr.tabindex]="set === 0 ? null : -1"
-                       (click)="$event.stopPropagation()">
-                      <lucide-icon name="github" [size]="14" aria-hidden="true"></lucide-icon>
-                      {{ 'projects.cards.viewCode' | translate }}
-                      <span class="sr-only">— {{ project.name }} ({{ 'projects.caseStudy.newTab' | translate }})</span>
-                    </a>
+
+              <!-- Footer pinned to the bottom so tech icons and buttons line up across cards -->
+              <div class="card-footer">
+                <div class="tech-row">
+                  @for (tech of project.techIcons; track tech.name) {
+                    <img loading="lazy" [src]="tech.icon" [alt]="tech.name" [title]="tech.name" class="tech-icon" />
                   }
                 </div>
-              }
+                <div class="card-actions">
+                  @if (project.privateCode) {
+                    <span class="card-private">
+                      <lucide-icon name="lock" [size]="13" aria-hidden="true"></lucide-icon>
+                      {{ 'projects.caseStudy.buttons.private' | translate }}
+                    </span>
+                  } @else {
+                    @if (project.links.demo; as demo) {
+                      <a class="card-btn card-btn--primary" [href]="demo.url" target="_blank" rel="noopener noreferrer"
+                         [attr.tabindex]="set === 0 ? null : -1"
+                         (click)="$event.stopPropagation()">
+                        <lucide-icon name="play" [size]="14" aria-hidden="true"></lucide-icon>
+                        {{ 'projects.cards.tryDemo' | translate }}
+                        <span class="sr-only">— {{ project.name }} ({{ 'projects.caseStudy.newTab' | translate }})</span>
+                      </a>
+                    }
+                    @if (codeUrl(project); as code) {
+                      <a class="card-btn" [href]="code" target="_blank" rel="noopener noreferrer"
+                         [attr.tabindex]="set === 0 ? null : -1"
+                         (click)="$event.stopPropagation()">
+                        <lucide-icon name="github" [size]="14" aria-hidden="true"></lucide-icon>
+                        {{ 'projects.cards.viewCode' | translate }}
+                        <span class="sr-only">— {{ project.name }} ({{ 'projects.caseStudy.newTab' | translate }})</span>
+                      </a>
+                    }
+                  }
+                </div>
+              </div>
             </div>
           }
         }

@@ -1,106 +1,106 @@
-<section class="timeline-section">
-  <div class="timeline-wrapper">
+<section class="exp-section">
+  <div class="exp-inner max-w-6xl mx-auto">
 
-    <div class="experience-header">
-  <h2 class="experience-title">
-    {{ 'experience.title' | translate }}
-    <span class="experience-line"></span>
-  </h2>
-</div>
-
-    <div class="timeline-container unified-container">
-
-      <!-- Línea única -->
-      <div #timelineLine class="timeline-line"></div>
-
-      <div class="timeline-items">
-
-
-        <div class="timeline-mini-title education-title">
-          {{ 'experience.education' | translate }}
-        </div>
-
-        <div *ngFor="let item of educationTimeline"
-             class="timeline-point education-point"
-             (click)="toggle(item)">
-
-          <div class="book-dot"
-               (mouseenter)="onEducationHover($event, item)">
-
-            📘
-
-            <div class="hover-card desktop">
-              <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
-              <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
-              <ul>
-                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
-                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
-              </ul>
-            </div>
-
-          </div>
-
-          <div class="timeline-basic-info">
-            <div class="title">{{ item.titleIsKey ? (item.title | translate) : item.title }}</div>
-            <div class="year">{{ item.start }}<ng-container *ngIf="item.current"> – {{ 'resume.present' | translate }}</ng-container><ng-container *ngIf="!item.current && item.end"> – {{ item.end }}</ng-container></div>
-          </div>
-
-          <div class="hover-card mobile"
-               [class.show]="item.expanded">
-            <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
-            <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
-            <ul>
-                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
-                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
-              </ul>
-          </div>
-
-        </div>
-
-        <!-- ================= WORK AFTER ================= -->
-
-        <div class="timeline-mini-title work-title text-center">
-          {{ 'experience.work' | translate }}
-        </div>
-
-        <div *ngFor="let item of workTimeline; let i = index"
-             class="timeline-point work-point"
-             [class.first-work]="i === 0"
-             (click)="toggle(item)">
-
-          <div class="dot work"
-               (mouseenter)="onWorkPointHover($event, item)">
-
-            <div class="hover-card desktop">
-              <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
-              <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
-              <ul>
-                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
-                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
-              </ul>
-            </div>
-
-          </div>
-
-          <div class="timeline-basic-info">
-            <div class="title">{{ item.titleIsKey ? (item.title | translate) : item.title }}</div>
-            <div class="year">{{ item.start }}<ng-container *ngIf="item.current"> – {{ 'resume.present' | translate }}</ng-container><ng-container *ngIf="!item.current && item.end"> – {{ item.end }}</ng-container></div>
-          </div>
-
-          <div class="hover-card mobile"
-               [class.show]="item.expanded">
-            <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
-            <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
-            <ul>
-                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
-                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
-              </ul>
-          </div>
-
-        </div>
-
-      </div>
+    <div class="exp-header">
+      <h2 class="exp-title">{{ 'experience.title' | translate }}</h2>
+      <span class="exp-line"></span>
     </div>
 
+    <div class="exp-grid">
+
+      <!-- ================= EDUCATION ================= -->
+      <div class="exp-col">
+        <h3 class="exp-subtitle">
+          <lucide-icon name="graduation-cap" [size]="18" aria-hidden="true"></lucide-icon>
+          {{ 'experience.education' | translate }}
+        </h3>
+
+        <ul class="edu-list">
+          @for (edu of education; track edu.id) {
+            <li class="exp-card edu-card">
+              <span class="exp-icon" aria-hidden="true">
+                <lucide-icon name="graduation-cap" [size]="20"></lucide-icon>
+              </span>
+              <div class="edu-body">
+                <p class="edu-title">{{ edu.titleKey | translate }}</p>
+                <p class="exp-meta">
+                  {{ edu.institution ? edu.institution + ' · ' : '' }}{{ edu.year }}@if (edu.ongoing) { ({{ 'resume.ongoing' | translate }})}
+                </p>
+                @if (edu.honors) {
+                  <p class="edu-honors">
+                    <lucide-icon name="award" [size]="14" aria-hidden="true"></lucide-icon>
+                    {{ 'resume.honors' | translate }}
+                  </p>
+                }
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- ================= WORK EXPERIENCE ================= -->
+      <div class="exp-col">
+        <h3 class="exp-subtitle">
+          <lucide-icon name="briefcase" [size]="18" aria-hidden="true"></lucide-icon>
+          {{ 'experience.work' | translate }}
+        </h3>
+
+        @for (job of jobs; track job.id) {
+          @let items = asList((job.highlightsKey ?? job.bulletsKey) | translate);
+          @let open = isOpen(job.id);
+
+          <article class="exp-card job-card">
+            <header class="job-head">
+              @if (job.logo) {
+                <span class="job-logo">
+                  <img [src]="job.logo" width="256" height="256" loading="lazy" decoding="async"
+                       [alt]="'experience.logoAlt' | translate: { company: job.company }" />
+                </span>
+              }
+              <div class="job-head-text">
+                <h4 class="job-role">{{ job.roleKey | translate }}</h4>
+                <p class="job-company">{{ job.company }}</p>
+                <p class="exp-meta">
+                  <span class="exp-meta-item">
+                    <lucide-icon name="calendar-days" [size]="14" aria-hidden="true"></lucide-icon>
+                    {{ job.dateRange.start }} – {{ job.dateRange.current ? ('resume.present' | translate) : job.dateRange.end }}
+                  </span>
+                  <span class="exp-meta-item">
+                    <lucide-icon name="map-pin" [size]="14" aria-hidden="true"></lucide-icon>
+                    {{ job.location }}
+                  </span>
+                </p>
+              </div>
+            </header>
+
+            <ul class="job-list">
+              @for (item of items.slice(0, visibleHighlights); track $index) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+
+            @if (items.length > visibleHighlights) {
+              <!-- Grid rows 0fr → 1fr: smooth height animation without measuring -->
+              <div class="job-more" [class.is-open]="open" [id]="'job-more-' + job.id" [attr.inert]="open ? null : ''">
+                <ul class="job-list job-list--more">
+                  @for (item of items.slice(visibleHighlights); track $index) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              </div>
+
+              <button type="button" class="job-toggle"
+                      [attr.aria-expanded]="open"
+                      [attr.aria-controls]="'job-more-' + job.id"
+                      (click)="toggle(job.id)">
+                {{ (open ? 'experience.showLess' : 'experience.showMore') | translate }}
+                <lucide-icon name="chevron-down" [size]="16" aria-hidden="true" class="job-toggle-icon"></lucide-icon>
+              </button>
+            }
+          </article>
+        }
+      </div>
+
+    </div>
   </div>
 </section>

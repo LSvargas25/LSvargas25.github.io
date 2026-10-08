@@ -119,17 +119,14 @@ export interface ProjectCaseStudy {
   /** i18n key for the line shown in the private-code panel (e.g. who owns the code) */
   privateNoteKey?: string;
 
-  /**
-   * Screenshot of the live demo: when set, the carousel card shows it instead of the
-   * avatar, together with the demo and code buttons.
-   */
-  cardShot?: string;
   /** Round avatar on the carousel card */
   cardImage: string;
   /** i18n key for the avatar's alt text; falls back to the project name */
   cardImageAltKey?: string;
   /** The image is already a full circle: fill the avatar edge to edge, no white backing */
   cardImageFill?: boolean;
+  /** Square app icon: show it whole, padded inside the white circle */
+  cardImagePad?: boolean;
   /** Wide image at the top of the case study; falls back to the card avatar */
   heroImage?: string;
   /** Glow class shared with the global syncPulse animation (styles.scss) */

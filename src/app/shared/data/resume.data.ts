@@ -66,7 +66,9 @@ export const RESUME_DATA: ResumeData = {
       location: 'San José, Costa Rica',
       dateRange: { start: '2023', current: true },
       subtitleKey: 'resume.experience.subtitle',
-      bulletsKey: 'resume.experience.bullets'
+      bulletsKey: 'resume.experience.bullets',
+      logo: 'assets/images/expande-256.webp',
+      highlightsKey: 'experience.jobs.expande.highlights'
     }
   ],
 

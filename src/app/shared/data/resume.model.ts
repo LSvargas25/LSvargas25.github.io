@@ -51,6 +51,10 @@ export interface ResumeExperienceEntry {
   subtitleKey: string;
   /** i18n key pointing to an array of bullet strings */
   bulletsKey: string;
+  /** Company logo for the Experience section */
+  logo?: string;
+  /** i18n key for the short bullets (max. two lines each) shown in the Experience section */
+  highlightsKey?: string;
 }
 
 export interface ResumeProjectEntry {

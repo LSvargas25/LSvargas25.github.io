@@ -164,6 +164,12 @@ lucide-icon {
   background: transparent;
 }
 
+/* Square app icon (LvBuild): shown whole inside the white circle */
+.cs-avatar--pad img {
+  padding: 21px;
+  object-fit: contain;
+}
+
 .cs-eyebrow {
   font-size: 0.72rem;
   font-weight: 600;
