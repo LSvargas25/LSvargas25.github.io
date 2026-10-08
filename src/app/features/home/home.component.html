@@ -1,0 +1,119 @@
+<!-- ================= HERO ================= -->
+<section
+  id="hero"
+  class="section-base hero-section relative overflow-hidden"
+>
+
+  <!-- ================= BACKGROUND GLOWS ================= -->
+  <div class="absolute pointer-events-none inset-0 z-10">
+    <div
+      class="absolute top-0 -left-40 w-[600px] h-[600px]
+             bg-blue-400/20 rounded-full blur-[120px] opacity-0"
+    >
+    </div>
+  </div>
+
+  <!-- ================= HERO HEADER (TYPEWRITER) ================= -->
+  <div
+    class="relative z-50 flex flex-col items-center
+             mb-6 md:mb-8"
+  >
+    <div class="flex items-baseline gap-3 flex-wrap justify-center">
+      <span
+        id="hero-im"
+        class="text-3xl md:text-5xl font-extrabold tracking-tight
+                 text-black drop-shadow-lg"
+      >
+        {{ 'home.hero.im' | translate }}
+      </span>
+
+      <span
+        id="hero-typewriter-wrap"
+        class="text-xl md:text-3xl font-semibold
+                 bg-gradient-to-r from-[#4E342E] via-[#8D6E63] to-[#D4AF37]
+                 bg-clip-text text-transparent
+                 animate-typewriter
+                 overflow-hidden whitespace-nowrap
+                 border-r-4 border-[#4E342E]"
+      >
+        <span id="typewriter"></span>
+      </span>
+    </div>
+
+    <!-- Static role line: visible from the first frame, no typewriter delay -->
+    <p
+      id="hero-role-tag"
+      class="mt-2 text-center text-sm md:text-base font-semibold tracking-wide
+             text-[#6F6256]"
+    >
+      {{ 'resume.roleTag' | translate }}
+    </p>
+  </div>
+
+  <!-- ================= PROFILE + NOTE WRAPPER ================= -->
+  <div
+    class="relative z-10 flex-1 w-full
+           flex flex-col justify-center items-center
+           hero-content"
+  >
+
+    <!-- PROFILE CARD + NOTE: the note is anchored to the (centred) photo,
+         not to the viewport edge, so it never covers it at any width -->
+    <div class="hero-card-anchor">
+      <app-profile-card
+        name="Luis Steven Vargas Rodríguez"
+        [description]="'home.profile.description' | translate"
+        imageSrc="assets/images/principal-480.webp"
+        [languages]="'home.profile.languages' | translate"
+        [email]="contact.email"
+        [whatsapp]="whatsappUrl"
+        [github]="contact.github.url"
+        [linkedin]="contact.linkedin.url"
+      >
+      </app-profile-card>
+
+      <!-- NOTE -->
+      <div class="hero-note hidden xl:block">
+        <app-note></app-note>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= BELOW THE HERO =================
+     Prerendered like the rest of the page, but each section only hydrates
+     (runs its JS) when it scrolls into view: keeps the first load light. -->
+
+<!-- ================= PROFILE ================= -->
+<section id="profile" class="section-base section-divider scroll-section section-hidden">
+  @defer (hydrate on viewport) {
+    <app-profile-component></app-profile-component>
+  }
+</section>
+
+<!-- ================= Experience================= -->
+<section id="experience" class="section-base section-divider scroll-section section-hidden">
+  @defer (hydrate on viewport) {
+    <app-experience-component></app-experience-component>
+  }
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="section-base section-divider scroll-section section-hidden">
+  @defer (hydrate on viewport) {
+    <app-projects-component></app-projects-component>
+  }
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section-base section-divider scroll-section section-hidden">
+  @defer (hydrate on viewport) {
+    <app-contact-component></app-contact-component>
+  }
+</section>
+
+<!-- ================= FULL-PAGE SIDE DOTS (desktop only) ================= -->
+<app-section-dots></app-section-dots>

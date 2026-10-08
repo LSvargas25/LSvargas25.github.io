@@ -1,0 +1,693 @@
+{
+  "nav": {
+    "home": "Home",
+    "profile": "Profile",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact",
+    "toggle": "Toggle navigation",
+    "lang": {
+      "es": "Spanish (Costa Rica)",
+      "en": "English (USA)"
+    },
+    "skipToContent": "Skip to main content",
+    "sectionsNav": "Section navigation",
+    "goTo": "Go to {{section}}",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "home": {
+    "hero": {
+      "im": "I'm"
+    },
+    "typewriter": {
+      "words": [
+        "Software Developer",
+        "Frontend Developer",
+        "Backend Developer",
+        "Database Developer"
+      ]
+    },
+    "profile": {
+      "description": "Software Developer specializing in the design and development of scalable, business-driven backend systems and modern full-stack applications.",
+      "languages": "Spanish (Native) | English (Advanced)"
+    }
+  },
+  "profile": {
+    "title": "Professional Profile",
+    "description": {
+      "intro": "Software Developer with a strong focus on",
+      "emphasis1": "designing reliable systems",
+      "mid": "writing",
+      "emphasis2": "clean, intentional code",
+      "and": "and delivering solutions that",
+      "emphasis3": "scale with real-world needs."
+    },
+    "skills": {
+      "backend": "Backend",
+      "databases": "Databases",
+      "frontend": "Frontend",
+      "tools": "DevOps & tools",
+      "desktopMobile": "Desktop & mobile",
+      "testing": "Testing",
+      "ai": "AI"
+    },
+    "softSkills": {
+      "title": "Soft Skills",
+      "items": [
+        "Problem solving",
+        "Teamwork",
+        "Client communication",
+        "Continuous learning",
+        "Adaptability"
+      ]
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "education": "Education",
+    "work": "Work"
+  },
+  "projects": {
+    "title": "Projects",
+    "cards": {
+      "pokedex": {
+        "description": "An interactive experience inspired by the original Pokedex, where users complete challenges to unlock Pokemon through progressive gameplay."
+      },
+      "expande": {
+        "description": "A scalable enterprise platform focused on tracking, analyzing, and centralizing critical business actions across multiple operations."
+      },
+      "fithouse": {
+        "description": "A mobile solution designed to guide gym members through structured workouts, improving consistency and long-term engagement."
+      },
+      "vcbike": {
+        "description": "A comprehensive management system built to streamline operations for a real-world bicycle service business."
+      },
+      "fitros": {
+        "description": "Management platform for gyms and coaching: Owner, Admin and Coach roles, clients, workout routines and weekly training plans. .NET API with Clean Architecture and an Angular frontend."
+      },
+      "lvbuild": {
+        "description": "ERP for a Costa Rican construction company: budgets, PDF offers, projects, weekly logs, payroll, warehouse, store and invoicing."
+      },
+      "finanzas": {
+        "description": "Personal finance app installable on your phone (PWA): accounts, expenses, income, investments and loans, with a Python and FastAPI backend."
+      },
+      "demoBadge": "Demo",
+      "shotAlt": "Screenshot of the {{name}} demo",
+      "tryDemo": "Try the demo",
+      "viewCode": "View code",
+      "coldStartNote": "The demos run on free servers: the first load can take up to 1 minute."
+    },
+    "carousel": {
+      "prev": "Scroll left",
+      "next": "Scroll right"
+    },
+    "caseStudy": {
+      "eyebrow": "Case study",
+      "open": "Open the {{name}} case study",
+      "privateBadge": "Private code",
+      "heroAlt": "{{name}} image",
+      "newTab": "(opens in a new tab)",
+      "coldStart": "The demos run on free servers: the first load can take up to 1 minute.",
+      "sections": {
+        "problem": "Problem",
+        "solution": "Solution",
+        "role": "My role",
+        "architecture": "Architecture",
+        "decisions": "Technical decisions",
+        "features": "Features",
+        "testing": "Testing",
+        "links": "Demo and code",
+        "context": "Problem and solution"
+      },
+      "buttons": {
+        "demo": "View demo",
+        "backend": "Backend code",
+        "frontend": "Frontend code",
+        "apiDocs": "API (Swagger)",
+        "private": "Private code",
+        "code": "Code"
+      },
+      "stack": {
+        "backend": "Backend",
+        "frontend": "Frontend",
+        "mobile": "Mobile",
+        "testing": "Testing",
+        "desktop": "Desktop",
+        "dataReports": "Data and reports"
+      },
+      "validates": "What it validates",
+      "highlights": {
+        "liveDemo": "Live demo"
+      },
+      "architecture": {
+        "inward": "Dependencies point inward",
+        "diagram": "Layer diagram",
+        "stateMachines": "State machines"
+      },
+      "cta": {
+        "withDemo": "Try it live or browse the code.",
+        "codeOnly": "Browse the code on GitHub.",
+        "private": "This project's code is private."
+      },
+      "roleAvatarAlt": "Luis Steven Vargas"
+    },
+    "items": {
+      "lvbuild": {
+        "tagline": "ERP for a Costa Rican construction company",
+        "problem": "A Costa Rican construction company needed a single system for its whole workflow: budgets, client offers, project execution, weekly logs and payroll, warehouse, a store with cash registers, and invoicing.",
+        "solution": "LvBuild connects that flow end to end: budgets become PDF offers and projects with budget-vs-actual tracking, weekly logs generate payroll, and the system covers the warehouse, the store with cash registers, and invoicing.",
+        "role": "Sole full-stack developer: business process analysis, data modeling, .NET API, React frontend, automated tests, CI and deployment on Render.",
+        "architecture": {
+          "summary": "The API is split into four projects with dependencies pointing inward, toward the domain.",
+          "points": [
+            "Three ADRs document the architecture decisions."
+          ],
+          "layers": {
+            "api": "Controllers, middleware, authentication, health checks and Swagger.",
+            "application": "Services holding the business rules, DTOs, validators and interfaces.",
+            "domain": "Entities and enums; knows nothing about ASP.NET Core or EF Core.",
+            "infrastructure": "EF Core, repositories, JWT, PDFs with QuestPDF, file storage and demo data."
+          },
+          "stateMachines": [
+            {
+              "name": "Budget",
+              "path": [
+                {
+                  "label": "Draft"
+                },
+                {
+                  "label": "Review"
+                },
+                {
+                  "label": "Sent"
+                },
+                {
+                  "label": "ClientApproved"
+                }
+              ],
+              "branches": "Review → Correction → Review. Sent → Correction (withdrawn from sales). Can be cancelled from Draft, Review, Correction or Sent."
+            },
+            {
+              "name": "Offer",
+              "path": [
+                {
+                  "label": "Draft"
+                },
+                {
+                  "label": "SentToClient",
+                  "note": "PDF available"
+                },
+                {
+                  "label": "ClientAccepted",
+                  "note": "Enables creating the project"
+                }
+              ],
+              "branches": "SentToClient → Draft (revert)."
+            },
+            {
+              "name": "Weekly log",
+              "path": [
+                {
+                  "label": "Draft"
+                },
+                {
+                  "label": "Review"
+                },
+                {
+                  "label": "Approved",
+                  "note": "Generates payroll"
+                }
+              ],
+              "branches": "Review → Draft."
+            },
+            {
+              "name": "Invoice",
+              "path": [
+                {
+                  "label": "Draft"
+                },
+                {
+                  "label": "Issued",
+                  "note": "Requires an open cash register"
+                },
+                {
+                  "label": "Cancelled"
+                }
+              ],
+              "branches": "Credit invoices record payments against the issued invoice."
+            }
+          ]
+        },
+        "decisions": [
+          "JWT authentication with refresh tokens and 5 roles.",
+          "Configuration validated at startup.",
+          "Health checks in the API.",
+          "PDF offer generation with QuestPDF.",
+          "EF Core 9 on PostgreSQL 16, with Docker.",
+          "CI with zero warnings.",
+          "Frontend with TanStack Query for server data and react-hook-form + zod for forms.",
+          "Single-flight token refresh: when several requests hit an expired token, only one refresh is made."
+        ],
+        "features": [
+          "Budgets that become PDF offers",
+          "Projects with budget-vs-actual tracking",
+          "Weekly logs that generate payroll",
+          "Warehouse",
+          "Store with cash registers and invoicing",
+          "Access through 5 roles"
+        ],
+        "testing": {
+          "unit": {
+            "title": "Service unit tests",
+            "description": "Every business module. Budgets alone has 24 tests for its state machine.",
+            "validates": [
+              "Totals are recalculated.",
+              "A budget with no chapters cannot be sent for review.",
+              "Requesting a correction requires a comment.",
+              "A budget approved by the client can no longer be modified.",
+              "Cancelling stores the reason in the history."
+            ]
+          },
+          "http": {
+            "title": "HTTP over the real pipeline",
+            "validates": [
+              "Error responses.",
+              "Health checks.",
+              "Swagger.",
+              "Configuration validation at startup."
+            ]
+          },
+          "integration": {
+            "title": "Integration with a real PostgreSQL 16",
+            "description": "Testcontainers with the real migrations.",
+            "validates": [
+              "Approved budget + accepted offer → creates the project.",
+              "Approved weekly log → paid payroll → updates the project expenses.",
+              "Issuing an invoice deducts stock and assigns a number.",
+              "Two draft invoices do not break the unique index."
+            ]
+          },
+          "web": {
+            "title": "Frontend",
+            "validates": [
+              "Bearer token on every request.",
+              "Several simultaneous 401s trigger a single refresh and retry everything.",
+              "If the refresh fails, the session is closed.",
+              "A failed login is not treated as an expired session.",
+              "Budget permission matrix: status × role."
+            ]
+          },
+          "ci": {
+            "title": "CI",
+            "validates": [
+              "Formatting and build.",
+              "Tests with coverage.",
+              "Docker image build and a smoke test against PostgreSQL.",
+              "The container does not run as root."
+            ]
+          }
+        },
+        "highlights": {
+          "roles": "5 roles",
+          "integration": "Integration with a real PostgreSQL 16",
+          "ci": "CI with zero warnings"
+        },
+        "logoAlt": "LvBuild logo",
+        "demo": {
+          "access": "Sign in with one click as any demo role.",
+          "note": "Demo version; the full version was built for Soluciones Expande."
+        }
+      },
+      "fitros": {
+        "tagline": "Management platform for gyms and coaching",
+        "problem": "Gyms and personal trainers need to assign coaches to clients, build workout routines and weekly training plans, and notify clients, with different levels of access for the owner, admins and coaches.",
+        "solution": "FitRos models that hierarchy directly: a .NET API with Owner, Admin and Coach roles, each scoped to what it can manage, and an Angular frontend that consumes it.",
+        "role": "Full-stack developer: designed the .NET API with Clean Architecture and the Angular frontend, including authentication, roles and the test suite.",
+        "architecture": {
+          "summary": "Clean Architecture split into separate projects, so business rules don't depend on infrastructure.",
+          "points": [
+            "Each use case is a command/handler pair (CQRS-style), which keeps controllers thin and business logic independently testable."
+          ],
+          "layers": {
+            "api": "Controllers, JWT authentication and Swagger.",
+            "application": "Use cases as command/handler pairs.",
+            "infrastructure": "EF Core and external services (email).",
+            "domain": "Entities, enums and domain rules, with no external dependencies."
+          }
+        },
+        "decisions": [
+          "One command/handler per use case, CQRS-style.",
+          "EF Core with PostgreSQL.",
+          "JWT authentication with role-based access."
+        ],
+        "features": [
+          "Owner, Admin and Coach roles, each with its own scope",
+          "Google sign-in",
+          "Email verification",
+          "Clients, workout routines and weekly training plans"
+        ],
+        "testing": {
+          "handlers": {
+            "title": "Isolated handlers",
+            "description": "Every command/query in the Application layer, with test doubles.",
+            "validates": [
+              "Login fails if the email is not verified."
+            ]
+          },
+          "api": {
+            "title": "API-level tests per module",
+            "description": "Auth, gyms, coaches, clients, routines, weekly plans, notifications, CORS and health.",
+            "validates": [
+              "Every weekly-plan endpoint returns 401 without authentication."
+            ]
+          },
+          "web": {
+            "title": "Angular frontend",
+            "description": "61 specs covering guards, interceptors, services and pages. Role guard examples:",
+            "validates": [
+              "Owner areas are closed to Admin and Coach.",
+              "Only the Coach can edit their own plan.",
+              "A client cannot manage catalogs or plans.",
+              "A disallowed role is redirected to /unauthorized."
+            ]
+          },
+          "ci": {
+            "title": "CI",
+            "validates": [
+              "Build and tests on every push."
+            ]
+          }
+        },
+        "highlights": {
+          "cleanArchitecture": "Clean Architecture",
+          "roles": "Owner / Admin / Coach roles",
+          "tests": "~130 test files in the API"
+        },
+        "demo": {
+          "access": "Sign in as Owner, Admin, Coach or Client with one click.",
+          "note": "Demo version; the full version is in real use at a gym."
+        }
+      },
+      "pokedex": {
+        "tagline": "Interactive Pokedex with 3v3 battles",
+        "solution": "An Angular 20 Pokedex with a 3v3 battle mode and mini-games, backed by its own Node/Express service that caches PokeAPI data.",
+        "role": "Full-stack developer: Angular frontend with battle mode and mini-games, and a Node/Express backend with caching over PokeAPI, Supabase authentication and deployment.",
+        "architecture": {
+          "summary": "The Node/Express backend acts as a caching layer over PokeAPI, with a concurrency limit and retries. Authentication is handled by Supabase Auth."
+        },
+        "decisions": [
+          "Angular 20 with signals.",
+          "Backend cache over PokeAPI with a concurrency limit and retries.",
+          "Supabase Auth with guest, Google or email sign-in."
+        ],
+        "features": [
+          "Guest, Google or email sign-in",
+          "3v3 battles with mini-games",
+          "GSAP animations",
+          "Sound with the Web Audio API"
+        ],
+        "testing": {
+          "e2e": {
+            "title": "E2E",
+            "validates": [
+              "A visitor's full journey: enter as a guest → build a team → battle."
+            ]
+          },
+          "web": {
+            "title": "Frontend",
+            "description": "Components, guard and interceptor.",
+            "validates": [
+              "A 401 from the backend closes the session and sends the user to login.",
+              "Other errors leave the session untouched."
+            ]
+          },
+          "api": {
+            "title": "Backend",
+            "validates": [
+              "/health responds without authentication.",
+              "/health/ready returns 503 if Supabase is unavailable.",
+              "Protected routes without a token or with an invalid token → 401.",
+              "CORS only allows configured origins.",
+              "Unknown route → 404."
+            ]
+          },
+          "ci": {
+            "title": "CI",
+            "validates": [
+              "Lint, build and tests."
+            ]
+          }
+        },
+        "highlights": {
+          "battles": "3v3 battles",
+          "e2e": "E2E with Playwright"
+        },
+        "demo": {
+          "access": "Play as a guest, no sign-up."
+        }
+      },
+      "expande": {
+        "tagline": "Production management system for a construction and building-materials company",
+        "highlights": {
+          "production": "In production",
+          "locations": "2 warehouses + 1 point of sale",
+          "maintenance": "Ongoing maintenance"
+        },
+        "problem": "Soluciones Expande sells construction materials and also carries out construction projects. It needed to control the inventory of several warehouses and its point of sale, its purchases, sales and cash register, and keep a record of each project, all in a single system with reliable data.",
+        "solution": "A custom web system that centralizes the operation: inventory per warehouse with transfers between warehouses, purchases from suppliers, sales with cash register and invoicing, quotes, reports and the record of construction projects. It is in real use and has been maintained and extended over time to meet the company's needs.",
+        "role": "Lead full-stack developer: designed the database, the ASP.NET Core API and the Angular frontend, and maintain the system in production. It is the project that has given me the most experience as a developer: working with a company's real data, changing requirements and daily operations.",
+        "architecture": {
+          "summary": "The Angular + Tailwind frontend consumes an ASP.NET Core API organized into controllers, services and repositories, which persists to SQL Server with EF Core."
+        },
+        "decisions": [
+          "Repository pattern with interfaces and DTOs.",
+          "JWT authentication and API-key middleware for service-to-service calls.",
+          "Inventory control by batches and movements (kardex) per warehouse.",
+          "Price and cost history for every item.",
+          "Audit log of operations.",
+          "Encryption of sensitive data."
+        ],
+        "features": [
+          "Item catalog with variants and attributes",
+          "Inventory per warehouse and transfers between warehouses",
+          "Purchases from suppliers",
+          "Point of sale with cash register opening and closing",
+          "Invoicing with taxes",
+          "Credit sales and payments",
+          "Quotes",
+          "Construction project records",
+          "Reports",
+          "Users and roles"
+        ],
+        "privateNote": "System in production; the code belongs to Soluciones Expande."
+      },
+      "fithouse": {
+        "tagline": "Digitizing client tracking for a gym",
+        "highlights": {
+          "thesis": "Licentiate thesis",
+          "honors": "Graduated with honors",
+          "android": "Android app"
+        },
+        "problem": "The gym recorded its clients' data with pen and paper. Records were lost, including sensitive data, weights and each client's progress, and trainers had no reliable information to follow up on.",
+        "solution": "A C# API and an Android app built with Xamarin.Forms on SQL Server, where trainers record each client's data month by month, review their progress to make data-driven decisions, and publish routines so clients can follow a plan.",
+        "role": "I built the entire project as my thesis for the Licentiate in Computer Science with an emphasis in Software Application Development: the C# API, the Xamarin.Forms Android app and the SQL Server database. I also wrote the academic document and defended the project before the examining panel, earning an outstanding grade that allowed me to graduate with honors.",
+        "architecture": {
+          "summary": "A C# API and a Xamarin.Forms Android app following the MVC pattern, with SQL Server as the database."
+        },
+        "features": [
+          "Monthly record of each client's data: weight, measurements and progress",
+          "Progress history per client",
+          "Routines published by the trainers",
+          "Access for the gym's different trainers"
+        ],
+        "testing": {
+          "api": {
+            "title": "Backend (API) tests",
+            "validates": [
+              "Recording and querying client data.",
+              "Publishing routines."
+            ]
+          },
+          "android": {
+            "title": "Android app tests",
+            "validates": [
+              "Recording and querying client data.",
+              "Publishing routines."
+            ]
+          }
+        },
+        "privateNote": "The code and the app belong to the gym."
+      },
+      "vcbike": {
+        "tagline": "Inventory, sales and repair system for a bicycle shop",
+        "highlights": {
+          "graduation": "Bachelor's graduation project",
+          "installed": "Installed at the business",
+          "reports": "Reports with Crystal Reports"
+        },
+        "problem": "VCBikeService sells cycling products and accessories and also repairs bicycles. It needed to control its inventory and its purchase and sale prices, and to calculate the real cost of each repair based on the products used.",
+        "solution": "A C# desktop application with Windows Forms and SQL Server that manages the full inventory: product intake with purchase price, sales with sale price and stock control, and a step-by-step record of each repair with the products used to calculate its total price. Invoices and reports are generated with Crystal Reports.",
+        "role": "I built the entire application as my graduation project for the Bachelor's degree in Computer Engineering and installed it on the business's computer, where the company used it for its daily operations.",
+        "architecture": {
+          "summary": "Desktop application following the MVC pattern: the interface in Windows Forms, the logic in C# and SQL Server as the database, with Crystal Reports for invoices and reports."
+        },
+        "features": [
+          "Product intake with purchase price",
+          "Sales with sale price and stock updates",
+          "Step-by-step record of each repair with the products used",
+          "Automatic calculation of each repair's total price",
+          "Invoices and reports with Crystal Reports"
+        ],
+        "privateNote": "The code belongs to VCBikeService."
+      },
+      "finanzas": {
+        "tagline": "Personal finance app installable on your phone (PWA)",
+        "highlights": {
+          "pwa": "Installable PWA",
+          "python": "Python + FastAPI",
+          "openSource": "Open source (MIT)"
+        },
+        "problem": "Tracking expenses, income, investments and loans from your phone without relying on a paid app, while keeping each person's data private.",
+        "solution": "A PWA that installs on the iPhone or Android home screen like an app, with a Python backend that stores each user's data.",
+        "role": "I built the entire project: the Python API with FastAPI, the database, authentication and the framework-free JavaScript PWA.",
+        "architecture": {
+          "summary": "A single server serves both the API and the web app."
+        },
+        "decisions": [
+          "PWA instead of a native app: iOS does not allow native apps or widgets built with Python; the PWA installs with its own icon and in full screen.",
+          "One server for the API and the frontend: a single deployment.",
+          "SQLite by default and PostgreSQL via DATABASE_URL: zero configuration locally and persistent data in production.",
+          "Framework-free JavaScript: a lightweight app that loads fast on the phone.",
+          "Service worker: fast loading and basic offline support."
+        ],
+        "features": [
+          "Accounts with balances: cash, card, bank and savings",
+          "Quick expenses and income from a floating button",
+          "Investments and loans with an expected return date and the amount actually received",
+          "Dashboard with total balance, the month's income and expenses, and active investments",
+          "Multi-user sign-up and login (JWT): each user sees only their own data",
+          "API documentation with Swagger"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "I'm always open to new opportunities and collaborations. Feel free to reach out!",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "toast": {
+      "success": "Message sent successfully!",
+      "error": "Something went wrong. Please try again.",
+      "wait": "Please wait {{seconds}} s before sending another message."
+    }
+  },
+  "profileCard": {
+    "photoAlt": "Profile photo",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  },
+  "note": {
+    "message": "Discover my professional resume",
+    "button": {
+      "resume": "Resume"
+    },
+    "resumeAria": "Open resume"
+  },
+  "footer": {
+    "description": "Open to professional collaboration. Contact me to discuss how we can deliver effective and scalable solutions together.",
+    "website": "Website",
+    "contact": "Contact",
+    "links": {
+      "home": "Home",
+      "profile": "Profile",
+      "experience": "Experience",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "copyright": "(c) {{year}} Luis Steven Vargas. All Rights Reserved."
+  },
+  "modal": {
+    "close": "Close modal"
+  },
+  "resume": {
+    "roleTag": "Software Developer — Backend / Full Stack (.NET, C#, Angular)",
+    "present": "Present",
+    "ongoing": "ongoing",
+    "sections": {
+      "summary": "Professional Summary",
+      "skills": "Technical Skills",
+      "experience": "Experience",
+      "projects": "Projects",
+      "education": "Education",
+      "languages": "Languages",
+      "reference": "Reference"
+    },
+    "summary": "Software Developer with a Computer Science background and hands-on experience building backend and full-stack applications in C# (.NET) and Angular through independent, self-directed projects — including REST APIs, SQL Server/MongoDB data layers, and an internal management system currently in development. Brings genuine business-operations experience from several years supporting quotations, expense tracking, and project coordination for a construction and building-materials company, providing a practical, first-hand understanding of real operational problems. Working knowledge of Python, SQL, and AI automation. Seeking a Backend or Full Stack Software Developer role.",
+    "skillGroups": {
+      "languagesFrameworks": "Languages / Frameworks",
+      "databases": "Databases",
+      "other": "Other",
+      "productivityTools": "Productivity Tools"
+    },
+    "experience": {
+      "role": "Software Developer & Operations Support",
+      "subtitle": "Construction & building-materials company — {{location}}",
+      "bullets": [
+        "Develop and maintain the company's production management system (per-warehouse inventory, point of sale, purchasing, invoicing and projects) with ASP.NET Core, Angular and SQL Server.",
+        "Managed price quotations, expense tracking, and investment/cost reporting for a construction and building-materials company operating across Costa Rica.",
+        "Supported on-site construction projects — houses, buildings, and terraces — working alongside architecture and building teams.",
+        "Provided customer service and administrative support for client-facing operations.",
+        "Gained direct, practical understanding of construction and business workflows, later applied to designing an internal software tool for the company (see Projects)."
+      ]
+    },
+    "projects": {
+      "lvconstrucciones": {
+        "tagline": "Backend ERP for a Construction & Building-Materials Business",
+        "bullets": [
+          "Designed and built a backend ERP in C# / .NET 8 using Clean Architecture, covering three integrated lines: construction budgeting/quoting and project tracking, point-of-sale, and warehouse inventory.",
+          "Implemented a quoting-to-project workflow with state machines, automated PDF generation, site logs, payroll, and automatic project cost tracking with no double-counting.",
+          "Built JWT authentication with refresh tokens, plus role-based authorization across 5 organizational roles.",
+          "Covered core business logic with automated unit tests (xUnit)."
+        ]
+      }
+    },
+    "education": {
+      "licentiate": "Licentiate Degree in Computer Science — Emphasis in Software Application Development",
+      "bachelor": "Bachelor's Degree in Computer Engineering",
+      "englishCert": "English Certification",
+      "continuingEd": "Continuing Education: Python, SQL & AI Automation"
+    },
+    "languageItems": [
+      {
+        "name": "English",
+        "level": "Advanced"
+      },
+      {
+        "name": "Spanish",
+        "level": "Native"
+      }
+    ],
+    "reference": {
+      "note": "References available upon request."
+    },
+    "download": {
+      "idle": "Download",
+      "loading": "Downloading...",
+      "done": "Downloaded",
+      "aria": "Download résumé PDF"
+    },
+    "honors": "graduated with honors"
+  },
+  "seo": {
+    "title": "Luis Steven Vargas Rodríguez — Software Developer",
+    "description": "Backend / Full Stack Software Developer based in Costa Rica: .NET, C#, Angular and SQL. Case studies, experience and contact.",
+    "imageAlt": "Luis Steven Vargas Rodríguez, Backend / Full Stack Software Developer"
+  }
+}

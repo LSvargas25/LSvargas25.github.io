@@ -1,0 +1,323 @@
+/* ======================================================
+   VERTICAL RHYTHM – single source of truth for section spacing
+====================================================== */
+:root {
+  --nav-h: 80px;                                          /* fixed navbar height (h-20) */
+  --section-py: clamp(3rem, 2rem + 3vw, 5rem);            /* 48px mobile → 80px desktop */
+  --section-title-gap: clamp(2rem, 1.5rem + 1.5vw, 3rem); /* section title → content */
+  --fp-slide-py: clamp(0.75rem, 2.5vh, 2rem);             /* full-page slide breathing room */
+}
+
+/* Navbar hidden via the gold toggle: the layout stops reserving its height,
+   so sections (and full-page slides) use the whole viewport */
+html.nav-hidden {
+  --nav-h: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+/* GSAP ScrollToPlugin drives the scroll in full-page mode; native smooth
+   scrolling would fight its per-frame updates */
+html.fp-on {
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Oculta la scrollbar pero permite el scroll */
+*, *::before, *::after {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+body::-webkit-scrollbar, html::-webkit-scrollbar {
+  display: none;
+}
+body, html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* EXPANDE MODAL: Brand overlay, strong and premium */
+.expande-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: auto;
+  /* Mucho más opaco y oscuro, pero con branding */
+  background:
+    linear-gradient(120deg, rgba(218,197,162,0.92) 0%, rgba(236,218,184,0.90) 60%, rgba(243,233,211,0.88) 100%),
+    #DAC5A2;
+  box-shadow: 0 0 0 9999px rgba(218,197,162,0.98); /* fallback para oscurecer */
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+
+/* ======================================================
+   UNIFIED ANIMATION SYSTEM - All 4 project cards
+   PERFECT SYNCHRONIZATION: 5 seconds, ease-in-out
+   ALL ANIMATIONS HAVE IDENTICAL STRUCTURE
+====================================================== */
+
+.project-icon-glow {
+  will-change: transform, box-shadow, filter;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+}
+
+/* ======================================================
+   POKEDEX – Red + Black + White (0%, 25%, 50%, 75%, 100%)
+   FORCED SYNCHRONIZATION - Explicit timing params
+====================================================== */
+.pokedex-glow {
+  animation-duration: 5s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: ease-in-out !important;
+  animation-delay: 0s !important;
+  animation-name: syncPulse !important;
+  --glow-main: rgba(220, 38, 38, 0.45);
+  --glow-peak: rgba(220, 38, 38, 0.85);
+  --glow-dark: rgba(0, 0, 0, 0.65);
+  --inset-light: rgba(255, 255, 255, 0.2);
+  --inset-dark: rgba(255, 255, 255, 0.45);
+}
+
+/* ======================================================
+   EXPANDE – Yellow (0%, 25%, 50%, 75%, 100%)
+   FORCED SYNCHRONIZATION - Explicit timing params
+====================================================== */
+.expande-glow {
+  animation-duration: 5s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: ease-in-out !important;
+  animation-delay: 0s !important;
+  animation-name: syncPulse !important;
+  --glow-main: rgba(251, 191, 36, 0.45);
+  --glow-peak: rgba(251, 191, 36, 0.95);
+  --glow-dark: rgba(0, 0, 0, 0.45);
+  --inset-light: rgba(255, 255, 255, 0.35);
+  --inset-dark: rgba(0, 0, 0, 0.45);
+}
+
+/* ======================================================
+   FITHOUSE – Red (0%, 25%, 50%, 75%, 100%)
+====================================================== */
+.fithouse-glow {
+  animation-duration: 5s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: ease-in-out !important;
+  animation-delay: 0s !important;
+  animation-name: syncPulse !important;
+  --glow-main: rgb(255, 0, 0);
+  --glow-peak: rgba(255, 0, 0, 0.95);
+  --glow-dark: rgba(0, 0, 0, 0.65);
+  --inset-light: rgba(255, 255, 255, 0.25);
+  --inset-dark: rgba(0, 0, 0, 0.65);
+}
+
+/* ======================================================
+   FITROS – Green (0%, 25%, 50%, 75%, 100%)
+====================================================== */
+.fitros-glow {
+  animation-duration: 5s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: ease-in-out !important;
+  animation-delay: 0s !important;
+  animation-name: syncPulse !important;
+  --glow-main: rgba(34, 197, 94, 0.45);
+  --glow-peak: rgba(34, 197, 94, 0.85);
+  --glow-dark: rgba(0, 0, 0, 0.45);
+  --inset-light: rgba(255, 255, 255, 0.30);
+  --inset-dark: rgba(255, 255, 255, 0.50);
+}
+
+/* ======================================================
+   LVBUILD – Terracotta (0%, 25%, 50%, 75%, 100%)
+====================================================== */
+.lvbuild-glow {
+  animation-duration: 5s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: ease-in-out !important;
+  animation-delay: 0s !important;
+  animation-name: syncPulse !important;
+  --glow-main: rgba(161, 85, 58, 0.45);
+  --glow-peak: rgba(161, 85, 58, 0.85);
+  --glow-dark: rgba(0, 0, 0, 0.45);
+  /* the logo is a full terracotta circle: keep the inner ring in its own tone, not white */
+  --inset-light: rgba(161, 85, 58, 0.35);
+  --inset-dark: rgba(161, 85, 58, 0.55);
+}
+
+/* ======================================================
+   MIS FINANZAS – Sober emerald (0%, 25%, 50%, 75%, 100%)
+====================================================== */
+.finanzas-glow {
+  animation-duration: 5s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: ease-in-out !important;
+  animation-delay: 0s !important;
+  animation-name: syncPulse !important;
+  --glow-main: rgba(4, 120, 87, 0.40);
+  --glow-peak: rgba(4, 120, 87, 0.80);
+  --glow-dark: rgba(0, 0, 0, 0.45);
+  --inset-light: rgba(255, 255, 255, 0.30);
+  --inset-dark: rgba(255, 255, 255, 0.50);
+}
+
+/* ======================================================
+   VCBIKESERVICE – Black/White (0%, 25%, 50%, 75%, 100%)
+   FORCED SYNCHRONIZATION - Explicit timing params
+====================================================== */
+.vcbike-glow {
+  animation-duration: 5s !important;
+  animation-iteration-count: infinite !important;
+  animation-timing-function: ease-in-out !important;
+  animation-delay: 0s !important;
+  animation-name: syncPulse !important;
+
+  /* 🔁 Inverted colors */
+  --glow-main: rgb(0, 0, 0);
+  --glow-peak: rgba(0, 0, 0, 0.95);
+  --glow-dark: rgba(255, 255, 255, 0.65);
+  --inset-light: rgba(255, 255, 255, 0.25);
+  --inset-dark: rgba(255, 255, 255, 0.65);
+}
+
+/* ======================================================
+   UNIFIED KEYFRAMES - Exact same animation for all 4
+====================================================== */
+@keyframes syncPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 22px var(--glow-main), inset 0 0 0 1px var(--inset-light);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.03);
+    box-shadow: 0 0 35px 6px var(--glow-peak), inset 0 0 0 1px var(--inset-light);
+    filter: brightness(1.06);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 55px 16px var(--glow-peak), inset 0 0 0 1px var(--inset-dark);
+    filter: brightness(1.12);
+  }
+  75% {
+    transform: scale(1.03);
+    box-shadow: 0 0 35px 6px var(--glow-peak), inset 0 0 0 1px var(--inset-light);
+    filter: brightness(1.06);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 22px var(--glow-main), inset 0 0 0 1px var(--inset-light);
+    filter: brightness(1);
+  }
+}
+
+/* ======================================================
+   SKILLS ICONS – Hover Interaction
+====================================================== */
+.skill-icon,
+.soft-skill-icon {
+  filter: none;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-icon:hover,
+.soft-skill-icon:hover {
+  filter: brightness(1.2);
+  transform: scale(1.25) translateY(-6px) rotate(2deg);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(201, 164, 92, 0.4),
+    inset 0 0 8px rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+/* ======================================================
+   SCROLL ANIMATIONS – global (classes added via JS classList)
+====================================================== */
+.scroll-section {
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.section-hidden {
+  opacity: 0 !important;
+  transform: translateY(70px) !important;
+  pointer-events: none;
+}
+
+.section-visible {
+  opacity: 1 !important;
+  transform: translateY(0px) !important;
+  pointer-events: auto;
+}
+
+/* ======================================================
+   TAILWIND
+====================================================== */
+@import 'aos/dist/aos.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======================================================
+   EXPERTISE CIRCLE – Default fallback glow
+====================================================== */
+@keyframes zoomGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 20px rgba(37,99,235,0.35),
+      0 0 0 0 rgba(37,99,235,0.15);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 45px 10px rgba(37,99,235,0.55),
+      0 0 0 8px rgba(37,99,235,0.18);
+  }
+}
+
+.expertise-circle {
+  animation: zoomGlow 2.2s infinite ease-in-out;
+  box-shadow: 0 0 20px rgba(37,99,235,0.18);
+}
+
+/* ======================================================
+   SAFE AREAS (iPhone notch / home indicator)
+   index.html sets viewport-fit=cover, so content must keep clear of the
+   insets itself. Fixed elements handle their own offsets below.
+====================================================== */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Gold "hide navbar" toggle (fixed, top-right) stays clear of the notch */
+.navbar-toggle-btn {
+  top: calc(1.5rem + env(safe-area-inset-top)) !important;
+  right: calc(1.5rem + env(safe-area-inset-right)) !important;
+}
+
+/* Footer is the last thing on the page: keep it above the home indicator */
+.footer-navbar-theme {
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}

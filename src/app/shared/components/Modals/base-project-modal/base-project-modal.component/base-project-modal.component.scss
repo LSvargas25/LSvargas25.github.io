@@ -1,0 +1,16 @@
+/* SOLO RESPONSABILIDAD: overlay + interacción */
+/* El tamaño y scroll viven en cada modal interno */
+
+:host {
+  display: block;
+}
+
+.modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  width: 100vw;
+  height: 100vh;
+  background: #DAC5A2;
+  overflow-y: auto;
+}

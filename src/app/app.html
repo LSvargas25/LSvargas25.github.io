@@ -1,0 +1,16 @@
+<!-- ================= SKIP LINK (visible on keyboard focus) ================= -->
+<a href="#main-content" class="skip-link">{{ 'nav.skipToContent' | translate }}</a>
+
+<!-- ================= GLOBAL VANTA BACKGROUND ================= -->
+<div class="global-bg-wrapper">
+	<div #vantaBg class="vanta-bg"></div>
+	<div class="global-content">
+		<router-outlet></router-outlet>
+		@defer (hydrate on viewport) {
+			<app-footer></app-footer>
+		}
+	</div>
+</div>
+
+<!-- ================= RESUME SHEET (rendered outside any transform/filter context) ================= -->
+<app-resume-sheet></app-resume-sheet>

@@ -1,0 +1,306 @@
+
+.navbar-zoom {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+  will-change: transform;
+}
+
+.navbar-zoom:hover {
+  transform: translateY(-2px) scale(1.15);
+}
+/* LINK BASE */
+.navbar-link {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* TEXTO */
+.navbar-text {
+  display: inline-block;
+  color: #7A6C5F;
+  transition:
+    color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    text-shadow 0.35s ease;
+  will-change: transform;
+}
+
+/* HOVER (NO underline) */
+.navbar-link:hover .navbar-text {
+  color: #B89B6A;
+  transform: translateY(-2px);
+  text-shadow:
+    0 0 12px rgba(184, 155, 106, 0.35);
+}
+
+/* ACTIVE TEXTO */
+.navbar-link.active .navbar-text {
+  color: #B89B6A;
+}
+
+/* ACTIVE + HOVER  */
+.navbar-link.active:hover .navbar-text {
+  transform: translateY(-3px);
+  text-shadow:
+    0 0 18px rgba(212, 175, 55, 0.55);
+}
+
+/* UNDERLINE BASE */
+.navbar-underline {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  height: 2px;
+  width: 70%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #D4AF37,
+    transparent
+  );
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* UNDERLINE SOLO ACTIVE */
+.navbar-underline.active {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.lang-switch {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 155, 106, 0.45);
+  background: rgba(255, 253, 249, 0.7);
+  color: #6F6256;
+  font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.lang-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, 0.8);
+  box-shadow: 0 8px 18px -10px rgba(184, 155, 106, 0.55);
+}
+
+.lang-btn.active {
+  background: linear-gradient(135deg, #B89B6A, #D4AF37);
+  color: #fff;
+  border-color: transparent;
+}
+
+.flag {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.lang-code {
+  font-size: 0.75rem;
+  letter-spacing: 0.4px;
+}
+
+/* ================= RESUME BUTTON (always visible in navbar) ================= */
+.navbar-resume-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #B89B6A, #D4AF37);
+  color: #fff;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  box-shadow: 0 8px 18px -8px rgba(184, 155, 106, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.navbar-resume-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px -8px rgba(184, 155, 106, 0.75);
+}
+
+.navbar-resume-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.navbar-resume-label {
+  display: none;
+}
+
+/* From a tablet-ish width up, expand to a labeled pill so it reads clearly
+   without crowding the single-row layout on small phones. */
+@media (min-width: 640px) {
+  .navbar-resume-btn {
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .navbar-resume-label {
+    display: inline-block;
+  }
+}
+
+/* =====================================================
+   LAYOUT GUTTERS
+   Notch-safe side padding; below lg leave room for the fixed gold
+   "hide navbar" toggle (top-right, 48px) so the menu button never
+   sits under it.
+===================================================== */
+.navbar-inner {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+@media (max-width: 1023.98px) {
+  .navbar-inner {
+    padding-right: calc(4.75rem + env(safe-area-inset-right));
+  }
+}
+
+/* =====================================================
+   MOBILE MENU (below lg)
+===================================================== */
+.navbar-menu-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: #6F6256;
+  background: rgba(255, 253, 249, 0.85);
+  border: 1px solid rgba(184, 155, 106, 0.45);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.navbar-menu-btn:hover,
+.navbar-menu-btn[aria-expanded="true"] {
+  background: #fff;
+  border-color: rgba(184, 155, 106, 0.8);
+}
+
+.navbar-menu-btn:focus-visible,
+.mobile-link:focus-visible {
+  outline: 2px solid #8A6A3D;
+  outline-offset: 2px;
+}
+
+.navbar-mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0.5rem max(1rem, env(safe-area-inset-right)) 1rem max(1rem, env(safe-area-inset-left));
+  background: rgba(255, 253, 249, 0.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(184, 155, 106, 0.3);
+  box-shadow: 0 18px 32px -18px rgba(111, 98, 86, 0.45);
+  max-height: calc(100dvh - 5rem);
+  overflow-y: auto;
+
+  /* closed: invisible, not clickable, out of the tab order (also [inert]) */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.navbar-mobile-menu.open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-links {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-link {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #4a3f35;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.mobile-link.active {
+  color: #8A6A3D;
+  background: rgba(184, 155, 106, 0.12);
+}
+
+.mobile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.75rem 0;
+  border-top: 1px solid rgba(184, 155, 106, 0.25);
+}
+
+/* bigger tap targets inside the panel; the panel has room for the CV label */
+.navbar-mobile-menu .lang-btn,
+.navbar-mobile-menu .navbar-resume-btn {
+  min-height: 44px;
+}
+
+.navbar-mobile-menu .navbar-resume-btn {
+  width: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.navbar-mobile-menu .navbar-resume-label {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-mobile-menu,
+  .navbar-mobile-menu.open {
+    transition: none;
+  }
+}
+
+/* Inline links take over from lg up. Stated here because this sheet is global
+   (ViewEncapsulation.None) and loads after Tailwind, so `lg:hidden` alone loses. */
+@media (min-width: 1024px) {
+  .navbar-menu-btn,
+  .navbar-mobile-menu {
+    display: none;
+  }
+}

@@ -1,0 +1,244 @@
+/* ================= HEADER ================= */
+
+.Contact-header {
+  text-align: center;
+  margin-bottom: var(--section-title-gap);
+}
+
+.Contact-title {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #6F6256, #B89B6A, #6F6256);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 14px;
+}
+
+.Contact-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 300%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(184,155,106,0.9),
+    transparent
+  );
+  border-radius: 2px;
+}
+
+/* ================= FORM ================= */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+/* Name + Email share a row from 640px (stacked on phones) */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+}
+
+.form-group {
+  position: relative;
+}
+
+/* Full-page slide: Contact shares the screen with the footer, so its title
+   gap scales with the viewport height instead of the global value */
+:host-context(html.fp-on) .Contact-header {
+  margin-bottom: clamp(1.25rem, 3vh, var(--section-title-gap));
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 1rem; /* >= 16px: iOS does not zoom into the field */
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(111, 98, 86, 0.4);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-group label {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  font-size: 0.9rem;
+  color: #6F6256;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom: 1px solid #B89B6A;
+}
+
+.form-group input:focus + label,
+.form-group input:valid + label,
+.form-group textarea:focus + label,
+.form-group textarea:valid + label {
+  top: -12px;
+  font-size: 0.75rem;
+  color: #B89B6A;
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #B89B6A, #D4AF37);
+  transition: width 0.4s ease;
+}
+
+.form-group input:focus ~ .focus-border,
+.form-group textarea:focus ~ .focus-border {
+  width: 100%;
+}
+
+/* ================= BUTTON ================= */
+
+.contact-button {
+  margin-top: 1rem;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  font-weight: 500;
+  background: linear-gradient(135deg, #B89B6A, #D4AF37);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 12px 28px -8px rgba(184,155,106,0.6);
+}
+
+.contact-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -8px rgba(184,155,106,0.8);
+}
+
+.contact-button:disabled {
+  cursor: not-allowed;
+}
+
+/* STATES */
+
+.contact-button.sending {
+  background: linear-gradient(135deg, #9e8a66, #b89b6a);
+  opacity: 0.9;
+}
+
+.contact-button.sent {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.contact-button.error {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+/* ================= SPINNER ================= */
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* ================= TOAST ================= */
+
+.toast {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  backdrop-filter: blur(12px);
+  animation: toastIn 0.4s ease forwards;
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.toast.success {
+  background: rgba(46, 204, 113, 0.12);
+  border: 1px solid rgba(46, 204, 113, 0.4);
+  color: #2ecc71;
+}
+
+.toast.error {
+  background: rgba(231, 76, 60, 0.12);
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  color: #e74c3c;
+}
+
+.toast-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.toast.success .toast-icon {
+  background: rgba(46, 204, 113, 0.2);
+}
+
+.toast.error .toast-icon {
+  background: rgba(231, 76, 60, 0.2);
+}
+
+@keyframes toastIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Honeypot: off-screen, not display:none (some bots skip hidden fields) */
+.form-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

@@ -1,0 +1,70 @@
+
+/* ======================================================
+	 GLOBAL BACKGROUND WRAPPER – VANTA CONTAINER
+====================================================== */
+
+.global-bg-wrapper {
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	overflow-x: clip; /* clip = paint-only, does NOT create scroll container (unlike hidden) */
+}
+
+/* ======================================================
+	 VANTA BACKGROUND – CANVAS ELEMENT
+====================================================== */
+
+.vanta-bg,
+div[data-vanta-canvas] {
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100vh !important;
+	z-index: 0;
+	pointer-events: none;
+	/* Same ivory as Vanta's backgroundColor: what phones / reduced-motion users see */
+	background: #FAF7F2;
+}
+
+/* ======================================================
+	 GLOBAL CONTENT WRAPPER – SITS ABOVE BACKGROUND
+	 No z-index here — avoids creating a stacking context
+	 that would trap position:fixed modals inside it.
+	 .vanta-bg is position:fixed z-0, content naturally
+	 paints above it without needing z-index on this wrapper.
+====================================================== */
+
+.global-content {
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	background: transparent;
+}
+
+/* ======================================================
+	 SKIP LINK – hidden until keyboard-focused
+====================================================== */
+
+.skip-link {
+	position: fixed;
+	top: -100px;
+	left: 1rem;
+	z-index: 100000;
+
+	padding: 0.75rem 1.25rem;
+	border-radius: 8px;
+	background: #1f2937;
+	color: #fff;
+	font-weight: 600;
+	font-size: 0.9rem;
+	text-decoration: none;
+
+	transition: top 150ms ease;
+}
+
+.skip-link:focus {
+	top: 1rem;
+	outline: 2px solid #D4AF37;
+	outline-offset: 2px;
+}
