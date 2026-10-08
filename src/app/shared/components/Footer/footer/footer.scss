@@ -1,0 +1,175 @@
+.footer-navbar-theme {
+  background: linear-gradient(
+    to right,
+    rgba(255, 253, 249, 0.85),
+    rgba(244, 237, 228, 0.85),
+    rgba(234, 221, 203, 0.85)
+  );
+  backdrop-filter: blur(18px);
+  color: #6f6256;
+}
+
+/* Divider */
+.footer-divider {
+  border-color: rgba(0, 0, 0, 0.50);
+}
+
+/* Text */
+.footer-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(to right, #6f6256, #b89b6a, #6f6256);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-description {
+  font-size: 0.85rem;
+  color: #7a6c5f;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+/* Titles */
+.footer-title {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #6f6256;
+}
+
+/* Two columns (3 rows) keep the footer short enough to share a screen with Contact */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: 1.75rem;
+  row-gap: 0.3rem;
+}
+
+.footer-links li {
+  position: relative;
+  padding-left: 14px; // espacio para el punto
+}
+
+.footer-links li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); // stays level with the link at any height
+  color: #000; // NEGRO sólido como pediste
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* Hover coherente con navbar */
+.footer-links li a {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer-links li a:hover {
+  color: #b89b6a;
+  text-shadow: 0 0 10px rgba(184, 155, 106, 0.35);
+}
+
+/* ================= SOCIAL ICON BASE ================= */
+.footer-social {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+
+  color: #000;
+  fill: #000;
+
+  border: 1.5px solid transparent; // 🔹 SIEMPRE invisible
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+
+ svg, img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+
+/* Pills */
+.footer-pill {
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 155, 106, 0.45);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  font-size: 0.8rem;
+  color: #6f6256;
+  transition: all 0.35s ease;
+}
+
+/* Hover themes */
+.hover-green:hover { color: #16a34a; border-color: #16a34a; }
+.hover-pink:hover { color: #db2777; border-color: #db2777; }
+.hover-blue:hover { color: #2563eb; border-color: #2563eb; }
+.hover-dark:hover { color: #111827; border-color: #111827; }
+
+/* Copy */
+.footer-copy {
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 0.75rem 0;
+  color: #7a6c5f;
+}
+
+.social-whatsapp:hover {
+  box-shadow:
+    0 0 12px rgba(22, 163, 74, 0.35),
+    0 0 24px rgba(22, 163, 74, 0.25);
+}
+.social-instagram:hover {
+  box-shadow:
+    0 0 12px rgba(219, 39, 119, 0.35),
+    0 0 24px rgba(219, 39, 119, 0.25);
+}
+.social-linkedin:hover {
+  box-shadow:
+    0 0 12px rgba(37, 99, 235, 0.35),
+    0 0 24px rgba(37, 99, 235, 0.25);
+}
+.social-github:hover {
+  box-shadow:
+    0 0 12px rgba(17, 24, 39, 0.35),
+    0 0 24px rgba(17, 24, 39, 0.25);
+}
+
+
+/* Touch screens: every footer link is at least a 44px tap target */
+@media (pointer: coarse) {
+  .footer-social {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-links li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .footer-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

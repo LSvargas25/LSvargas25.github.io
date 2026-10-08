@@ -1,0 +1,234 @@
+/* =========================================================
+   PREMIUM COLOR SYSTEM — Warm Stone + Coffee
+========================================================= */
+
+$stone-light: #F6F3EF;
+$stone-mid:   #E7E1DB;
+$stone-ring:  #EFEAE4;
+
+$coffee-dark: #2A2A2A;
+$coffee-mid:  #5C5248;
+$coffee-soft: #8B7E74;
+
+$accent-gold: #B89B6A; // soft bronze (NOT yellow)
+
+/* =========================================================
+   KEYFRAMES
+========================================================= */
+
+@keyframes profile-float {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 12px 32px rgba(0,0,0,0.12),
+      0 0 0 rgba(0,0,0,0);
+  }
+
+  50% {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+      0 20px 48px rgba(0,0,0,0.18),
+      0 0 36px rgba(0,0,0,0.12);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow:
+      0 12px 32px rgba(0,0,0,0.12),
+      0 0 0 rgba(0,0,0,0);
+  }
+}
+
+@keyframes card-assemble {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes border-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes name-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes name-highlight {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+/* =========================================================
+   CARD STATES
+========================================================= */
+
+.card-animate {
+  opacity: 0;
+  transform: translateY(32px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: opacity, transform;
+}
+
+.card-assembled {
+  opacity: 1 !important;
+  pointer-events: auto;
+  animation: card-assemble 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* =========================================================
+   BORDER GRADIENT
+========================================================= */
+
+.border-gradient-animate {
+  opacity: 0;
+}
+
+.card-assembled .border-gradient-animate {
+  animation: border-fade-in 0.7s 0.15s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
+
+.profile-img-animate {
+  opacity: 1;
+  transform: scale(1);
+  will-change: opacity, transform;
+  animation: profile-float 4s ease-in-out infinite;
+}
+
+.profile-img-glow {
+  position: relative;
+}
+
+.profile-img-glow.glow-active::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 32px 12px rgba(255,255,255,0.20),
+    0 0 64px 28px rgba(184,155,106,0.14);
+  animation: glow-pulse 8s ease-in-out infinite;
+  pointer-events: none;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 65%,
+    transparent 90%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 65%,
+    transparent 90%
+  );
+}
+
+
+.profile-img-mask-top {
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 40%,
+    transparent 50%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 40%,
+    transparent 50%
+  );
+}
+
+/* =========================================================
+   NAME ANIMATION
+========================================================= */
+
+.name-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  will-change: opacity, transform;
+  margin-bottom: 1.5rem;
+}
+
+.name-reveal-active {
+  animation: name-fade-up 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.name-text {
+  position: relative;
+  display: inline-block;
+  animation: profile-float 4s ease-in-out infinite;
+  padding: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.35),
+    0 6px 18px rgba(0,0,0,0.18);
+}
+
+
+
+
+
+
+/* =========================================================
+   FADE DELAYS
+========================================================= */
+
+.fade-in-delayed {
+  opacity: 0;
+  animation: fade-in 0.7s 0.5s forwards;
+}
+
+.fade-in-delayed-2 {
+  opacity: 0;
+  animation: fade-in 0.7s 0.7s forwards;
+}
+
+/* =========================================================
+   BUTTON MICRO-INTERACTIONS
+========================================================= */
+
+.profile-btn {
+  transition:
+    box-shadow 0.25s cubic-bezier(0.4,0,0.2,1),
+    transform 0.22s cubic-bezier(0.4,0,0.2,1),
+    background 0.22s ease,
+    color 0.22s ease;
+  will-change: box-shadow, transform;
+}
+
+.profile-btn:hover {
+  box-shadow:
+    0 10px 32px -8px rgba(184,155,106,0.20),
+    0 2px 8px rgba(0,0,0,0.10);
+  transform: translateY(-2px) scale(1.025);
+}
+
+.profile-btn .icon-animate {
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+.profile-btn:hover .icon-animate {
+  transform: scale(1.05);
+}

@@ -1,0 +1,349 @@
+<article class="case-study" [style.--cs-accent]="project.accentRgb">
+
+  <!-- ================= HEADER ================= -->
+  <header class="cs-header" appScrollReveal [scrollRevealOnce]="true">
+    <div class="cs-avatar {{ project.glowClass }}" [class.cs-avatar--fill]="project.cardImageFill">
+      <img [src]="project.cardImage"
+           [alt]="project.cardImageAltKey ? (project.cardImageAltKey | translate) : project.name" />
+    </div>
+
+    <div class="cs-heading">
+      <p class="cs-eyebrow">{{ 'projects.caseStudy.eyebrow' | translate }}</p>
+      <h2 class="cs-title" [id]="titleId">{{ project.name }}</h2>
+      <p class="cs-tagline">{{ project.taglineKey | translate }}</p>
+    </div>
+  </header>
+
+  @if (project.highlights?.length) {
+    <ul class="cs-highlights" appScrollReveal [scrollRevealOnce]="true">
+      @for (fact of project.highlights; track fact.labelKey) {
+        <li class="cs-highlight">
+          <lucide-icon [name]="fact.icon" [size]="15" aria-hidden="true"></lucide-icon>
+          {{ fact.labelKey | translate }}
+        </li>
+      }
+    </ul>
+  }
+
+  @if (project.heroImage) {
+    <figure class="cs-hero" appScrollReveal [scrollRevealOnce]="true">
+      <img [src]="project.heroImage" [alt]="'projects.caseStudy.heroAlt' | translate: { name: project.name }" />
+    </figure>
+  }
+
+  @if (project.stack?.length) {
+    <dl class="cs-stack" appScrollReveal [scrollRevealOnce]="true">
+      @for (group of project.stack; track group.labelKey) {
+        <div class="cs-stack-group">
+          <dt>{{ group.labelKey | translate }}</dt>
+          <dd>
+            @for (tech of group.items; track tech) {
+              <span class="cs-chip">{{ tech }}</span>
+            }
+          </dd>
+        </div>
+      }
+    </dl>
+  }
+
+  <!-- ================= SECTIONS ================= -->
+  @for (section of sections; track section; let i = $index) {
+    <section class="cs-section cs-section--{{ section }}" appScrollReveal [scrollRevealOnce]="true"
+             [attr.aria-labelledby]="'cs-' + section">
+      <h3 class="cs-section-title" [id]="'cs-' + section">
+        <span class="cs-index" aria-hidden="true">{{ sectionNumber(i) }}</span>
+        {{ (section === 'context' ? contextTitleKey : 'projects.caseStudy.sections.' + section) | translate }}
+      </h3>
+
+      @switch (section) {
+
+        <!-- Problem → Solution -->
+        @case ('context') {
+          @let hasProblem = hasText(project.problemKey);
+          @let hasSolution = hasText(project.solutionKey);
+          <div class="cs-context" [class.cs-context--single]="!(hasProblem && hasSolution)">
+            @if (hasProblem) {
+              <div class="cs-context-panel cs-context-panel--problem">
+                @if (hasSolution) {
+                  <h4 class="cs-context-label">{{ 'projects.caseStudy.sections.problem' | translate }}</h4>
+                }
+                <p>{{ project.problemKey! | translate }}</p>
+              </div>
+            }
+            @if (hasProblem && hasSolution) {
+              <span class="cs-context-arrow" aria-hidden="true">
+                <lucide-icon name="arrow-right" [size]="18"></lucide-icon>
+              </span>
+            }
+            @if (hasSolution) {
+              <div class="cs-context-panel cs-context-panel--solution">
+                @if (hasProblem) {
+                  <h4 class="cs-context-label">{{ 'projects.caseStudy.sections.solution' | translate }}</h4>
+                }
+                <p>{{ project.solutionKey! | translate }}</p>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- Role -->
+        @case ('role') {
+          <div class="cs-role">
+            <img class="cs-role-photo"
+                 src="assets/images/principal-avatar-112.webp"
+                 width="52" height="52" loading="lazy"
+                 [alt]="'projects.caseStudy.roleAvatarAlt' | translate" />
+            <p>{{ project.roleKey! | translate }}</p>
+          </div>
+        }
+
+        <!-- Architecture -->
+        @case ('architecture') {
+          @let arch = project.architecture!;
+          <div class="cs-arch" [class.cs-arch--text-only]="!arch.tiers?.length">
+            @if (arch.tiers?.length) {
+              @if (arch.layout === 'rings') {
+                <figure class="cs-rings">
+                  <ng-container *ngTemplateOutlet="ring; context: { $implicit: 0 }"></ng-container>
+                  <figcaption>
+                    <lucide-icon name="arrow-down" [size]="14" aria-hidden="true"></lucide-icon>
+                    {{ 'projects.caseStudy.architecture.inward' | translate }}
+                  </figcaption>
+                </figure>
+              } @else {
+                <ol class="cs-flow" [attr.aria-label]="'projects.caseStudy.architecture.diagram' | translate">
+                  @for (tier of arch.tiers!; track $index) {
+                    <li class="cs-flow-step">
+                      @for (layer of tier; track layer.name) {
+                        <span class="cs-flow-node">{{ layer.name }}</span>
+                      }
+                    </li>
+                  }
+                </ol>
+              }
+            }
+
+            @if (hasText(arch.summaryKey) || list(arch.pointsKey).length) {
+              <div class="cs-arch-text">
+                @if (hasText(arch.summaryKey)) {
+                  <p class="cs-text">{{ arch.summaryKey! | translate }}</p>
+                }
+                @if (list(arch.pointsKey).length) {
+                  <ul class="cs-list">
+                    @for (point of list(arch.pointsKey); track $index) {
+                      <li>{{ point }}</li>
+                    }
+                  </ul>
+                }
+              </div>
+            }
+          </div>
+
+          @if (stateMachines.length) {
+            <div class="cs-machines">
+              <h4 class="cs-subtitle">{{ 'projects.caseStudy.architecture.stateMachines' | translate }}</h4>
+              <ul class="cs-machine-list">
+                @for (machine of stateMachines; track machine.name) {
+                  <li class="cs-machine">
+                    <span class="cs-machine-name">{{ machine.name }}</span>
+                    <ol class="cs-machine-path">
+                      @for (step of machine.path; track $index) {
+                        <li class="cs-state">
+                          <span class="cs-state-label">{{ step.label }}</span>
+                          @if (step.note) {
+                            <span class="cs-state-note">{{ step.note }}</span>
+                          }
+                        </li>
+                      }
+                    </ol>
+                    @if (machine.branches) {
+                      <p class="cs-machine-branches">
+                        <lucide-icon name="git-branch" [size]="13" aria-hidden="true"></lucide-icon>
+                        {{ machine.branches }}
+                      </p>
+                    }
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+
+          <!-- Nested Clean Architecture rings: tier 0 is the outer ring, the last tier is the core -->
+          <ng-template #ring let-depth>
+            @let tier = arch.tiers![depth];
+            @let isCore = depth === lastTierIndex;
+            <div class="cs-ring" [class.cs-ring--core]="isCore">
+              @if (depth > 0) {
+                <span class="cs-ring-arrow" aria-hidden="true">
+                  <lucide-icon name="arrow-down" [size]="12"></lucide-icon>
+                </span>
+              }
+              <div class="cs-ring-layers">
+                @for (layer of tier; track layer.name) {
+                  <div class="cs-ring-layer">
+                    <span class="cs-layer-name">{{ layer.name }}</span>
+                    @if (hasText(layer.responsibilityKey)) {
+                      <span class="cs-layer-role">{{ layer.responsibilityKey! | translate }}</span>
+                    }
+                  </div>
+                }
+              </div>
+              @if (!isCore) {
+                <ng-container *ngTemplateOutlet="ring; context: { $implicit: depth + 1 }"></ng-container>
+              }
+            </div>
+          </ng-template>
+        }
+
+        <!-- Decisions -->
+        @case ('decisions') {
+          <ul class="cs-decisions">
+            @for (decision of decisions; track $index) {
+              <li class="cs-decision">
+                <span class="cs-decision-title">{{ decision.title }}</span>
+                @if (decision.detail) {
+                  <span class="cs-decision-detail">{{ decision.detail }}</span>
+                }
+              </li>
+            }
+          </ul>
+        }
+
+        <!-- Features -->
+        @case ('features') {
+          <ul class="cs-features">
+            @for (feature of features; track $index) {
+              <li class="cs-feature">
+                <span class="cs-tile-icon" aria-hidden="true">
+                  <lucide-icon [name]="feature.icon" [size]="18"></lucide-icon>
+                </span>
+                <span>{{ feature.text }}</span>
+              </li>
+            }
+          </ul>
+        }
+
+        <!-- Testing -->
+        @case ('testing') {
+          <ul class="cs-tests">
+            @for (suite of testSuites; track suite.id) {
+              <li class="cs-test">
+                <div class="cs-test-head">
+                  <span class="cs-tile-icon" aria-hidden="true">
+                    <lucide-icon [name]="testIcons[suite.kind]" [size]="18"></lucide-icon>
+                  </span>
+                  <h4 class="cs-test-kind">{{ suite.titleKey | translate }}</h4>
+                  @if (suite.scope) {
+                    <span class="cs-test-scope">{{ 'projects.caseStudy.stack.' + suite.scope | translate }}</span>
+                  }
+                </div>
+
+                @if (suite.tools.length) {
+                  <div class="cs-test-tools">
+                    @for (tool of suite.tools; track tool) {
+                      <span class="cs-chip">{{ tool }}</span>
+                    }
+                  </div>
+                }
+
+                @if (hasText(suite.descriptionKey)) {
+                  <p class="cs-test-description">{{ suite.descriptionKey! | translate }}</p>
+                }
+
+                <p class="cs-test-label">{{ 'projects.caseStudy.validates' | translate }}</p>
+                <ul class="cs-test-validates">
+                  @for (example of list(suite.validatesKey); track $index) {
+                    <li>{{ example }}</li>
+                  }
+                </ul>
+              </li>
+            }
+          </ul>
+        }
+
+        <!-- Demo and code -->
+        @case ('links') {
+          <div class="cs-cta" [class.cs-cta--private]="project.privateCode">
+            <p class="cs-cta-lead">
+              @if (project.privateCode) {
+                <lucide-icon name="lock" [size]="18" aria-hidden="true"></lucide-icon>
+                {{ (hasText(project.privateNoteKey) ? project.privateNoteKey! : 'projects.caseStudy.cta.private') | translate }}
+              } @else if (project.links.demo) {
+                {{ 'projects.caseStudy.cta.withDemo' | translate }}
+              } @else {
+                {{ 'projects.caseStudy.cta.codeOnly' | translate }}
+              }
+            </p>
+
+            <div class="cs-actions">
+              @if (project.links.demo; as demo) {
+                <a class="cs-btn cs-btn--primary" [href]="demo.url" target="_blank" rel="noopener noreferrer">
+                  <lucide-icon name="external-link" [size]="16" aria-hidden="true"></lucide-icon>
+                  {{ 'projects.caseStudy.buttons.demo' | translate }}
+                  <span class="sr-only">{{ 'projects.caseStudy.newTab' | translate }}</span>
+                </a>
+              }
+
+              @if (project.privateCode) {
+                <button type="button" class="cs-btn cs-btn--disabled" disabled aria-disabled="true">
+                  <lucide-icon name="lock" [size]="16" aria-hidden="true"></lucide-icon>
+                  {{ 'projects.caseStudy.buttons.private' | translate }}
+                </button>
+              } @else {
+                @if (project.links.repo) {
+                  <a class="cs-btn" [href]="project.links.repo" target="_blank" rel="noopener noreferrer">
+                    <lucide-icon name="github" [size]="16" aria-hidden="true"></lucide-icon>
+                    {{ 'projects.caseStudy.buttons.code' | translate }}
+                    <span class="sr-only">{{ 'projects.caseStudy.newTab' | translate }}</span>
+                  </a>
+                }
+                @if (project.links.backendRepo) {
+                  <a class="cs-btn" [href]="project.links.backendRepo" target="_blank" rel="noopener noreferrer">
+                    <lucide-icon name="github" [size]="16" aria-hidden="true"></lucide-icon>
+                    {{ 'projects.caseStudy.buttons.backend' | translate }}
+                    <span class="sr-only">{{ 'projects.caseStudy.newTab' | translate }}</span>
+                  </a>
+                }
+                @if (project.links.frontendRepo) {
+                  <a class="cs-btn" [href]="project.links.frontendRepo" target="_blank" rel="noopener noreferrer">
+                    <lucide-icon name="github" [size]="16" aria-hidden="true"></lucide-icon>
+                    {{ 'projects.caseStudy.buttons.frontend' | translate }}
+                    <span class="sr-only">{{ 'projects.caseStudy.newTab' | translate }}</span>
+                  </a>
+                }
+              }
+
+              @if (project.links.apiDocs) {
+                <a class="cs-btn cs-btn--ghost" [href]="project.links.apiDocs" target="_blank" rel="noopener noreferrer">
+                  <lucide-icon name="file-code" [size]="16" aria-hidden="true"></lucide-icon>
+                  {{ 'projects.caseStudy.buttons.apiDocs' | translate }}
+                  <span class="sr-only">{{ 'projects.caseStudy.newTab' | translate }}</span>
+                </a>
+              }
+            </div>
+
+            @if (project.links.demo?.accessKey; as accessKey) {
+              <p class="cs-note">
+                <lucide-icon name="log-in" [size]="14" aria-hidden="true"></lucide-icon>
+                {{ accessKey | translate }}
+              </p>
+            }
+            @if (project.links.demo?.noteKey; as noteKey) {
+              <p class="cs-note">
+                <lucide-icon name="flask-conical" [size]="14" aria-hidden="true"></lucide-icon>
+                {{ noteKey | translate }}
+              </p>
+            }
+            @if (project.links.demo?.coldStart) {
+              <p class="cs-note">
+                <lucide-icon name="clock" [size]="14" aria-hidden="true"></lucide-icon>
+                {{ 'projects.caseStudy.coldStart' | translate }}
+              </p>
+            }
+          </div>
+        }
+      }
+    </section>
+  }
+
+</article>

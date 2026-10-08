@@ -1,0 +1,106 @@
+<section class="timeline-section">
+  <div class="timeline-wrapper">
+
+    <div class="experience-header">
+  <h2 class="experience-title">
+    {{ 'experience.title' | translate }}
+    <span class="experience-line"></span>
+  </h2>
+</div>
+
+    <div class="timeline-container unified-container">
+
+      <!-- Línea única -->
+      <div #timelineLine class="timeline-line"></div>
+
+      <div class="timeline-items">
+
+
+        <div class="timeline-mini-title education-title">
+          {{ 'experience.education' | translate }}
+        </div>
+
+        <div *ngFor="let item of educationTimeline"
+             class="timeline-point education-point"
+             (click)="toggle(item)">
+
+          <div class="book-dot"
+               (mouseenter)="onEducationHover($event, item)">
+
+            📘
+
+            <div class="hover-card desktop">
+              <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
+              <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
+              <ul>
+                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
+                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="timeline-basic-info">
+            <div class="title">{{ item.titleIsKey ? (item.title | translate) : item.title }}</div>
+            <div class="year">{{ item.start }}<ng-container *ngIf="item.current"> – {{ 'resume.present' | translate }}</ng-container><ng-container *ngIf="!item.current && item.end"> – {{ item.end }}</ng-container></div>
+          </div>
+
+          <div class="hover-card mobile"
+               [class.show]="item.expanded">
+            <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
+            <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
+            <ul>
+                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
+                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
+              </ul>
+          </div>
+
+        </div>
+
+        <!-- ================= WORK AFTER ================= -->
+
+        <div class="timeline-mini-title work-title text-center">
+          {{ 'experience.work' | translate }}
+        </div>
+
+        <div *ngFor="let item of workTimeline; let i = index"
+             class="timeline-point work-point"
+             [class.first-work]="i === 0"
+             (click)="toggle(item)">
+
+          <div class="dot work"
+               (mouseenter)="onWorkPointHover($event, item)">
+
+            <div class="hover-card desktop">
+              <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
+              <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
+              <ul>
+                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
+                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="timeline-basic-info">
+            <div class="title">{{ item.titleIsKey ? (item.title | translate) : item.title }}</div>
+            <div class="year">{{ item.start }}<ng-container *ngIf="item.current"> – {{ 'resume.present' | translate }}</ng-container><ng-container *ngIf="!item.current && item.end"> – {{ item.end }}</ng-container></div>
+          </div>
+
+          <div class="hover-card mobile"
+               [class.show]="item.expanded">
+            <h3>{{ item.titleIsKey ? (item.title | translate) : item.title }}</h3>
+            <h4>{{ item.subtitleIsKey ? (item.subtitle | translate) : item.subtitle }}</h4>
+            <ul>
+                <li *ngFor="let bullet of asList(item.bulletsKey ? (item.bulletsKey | translate) : [])">{{ bullet }}</li>
+                <li *ngIf="item.noteKey" class="timeline-note">{{ item.noteKey | translate }}</li>
+              </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

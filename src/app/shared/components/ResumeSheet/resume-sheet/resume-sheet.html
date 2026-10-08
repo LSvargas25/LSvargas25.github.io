@@ -1,0 +1,167 @@
+<div
+  *ngIf="visible()"
+  class="resume-overlay"
+  (mousedown)="onBackdropMouseDown($event)"
+>
+  <div #backdrop class="resume-backdrop"></div>
+
+  <div
+    #sheet
+    class="resume-sheet"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="titleId"
+    tabindex="-1"
+    (mousedown)="stop($event)"
+  >
+    <div class="resume-tape" aria-hidden="true"></div>
+
+    <button
+      type="button"
+      class="resume-close"
+      (click)="requestClose()"
+      [attr.aria-label]="'modal.close' | translate"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <div class="resume-scroll">
+      <!-- HEADER -->
+      <header class="resume-block resume-header">
+        <h2 [id]="titleId" class="resume-name">{{ data.fullName }}</h2>
+        <p class="resume-role">{{ data.roleTagKey | translate }}</p>
+
+        <ul class="resume-contact">
+          <li>{{ data.contact.location }}</li>
+          <li>
+            <a [href]="'mailto:' + data.contact.email">{{ data.contact.email }}</a>
+          </li>
+          <li>
+            <a [href]="data.contact.phoneHref">{{ data.contact.phoneDisplay }}</a>
+          </li>
+          <li>
+            <a [href]="data.contact.github.url" target="_blank" rel="noopener">{{ data.contact.github.label }}</a>
+          </li>
+          <li>
+            <a [href]="data.contact.linkedin.url" target="_blank" rel="noopener">{{ data.contact.linkedin.label }}</a>
+          </li>
+        </ul>
+      </header>
+
+      <!-- SUMMARY -->
+      <section class="resume-block">
+        <h3>{{ 'resume.sections.summary' | translate }}</h3>
+        <p>{{ 'resume.summary' | translate }}</p>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="resume-block">
+        <h3>{{ 'resume.sections.skills' | translate }}</h3>
+        <div class="resume-skill-group" *ngFor="let group of data.skills">
+          <h4>{{ group.labelKey | translate }}</h4>
+          <p>{{ group.items.join(', ') }}</p>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="resume-block">
+        <h3>{{ 'resume.sections.experience' | translate }}</h3>
+        <div class="resume-entry" *ngFor="let job of data.experience">
+          <div class="resume-entry-head">
+            <strong>{{ job.roleKey | translate }} — {{ job.company }}</strong>
+            <span class="resume-dates">
+              {{ job.dateRange.start }} – {{ job.dateRange.current ? ('resume.present' | translate) : job.dateRange.end }}
+            </span>
+          </div>
+          <p class="resume-entry-sub">{{ job.subtitleKey | translate: { location: job.location } }}</p>
+          <ul>
+            <li *ngFor="let bullet of (job.bulletsKey | translate)">{{ bullet }}</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="resume-block">
+        <h3>{{ 'resume.sections.projects' | translate }}</h3>
+        <div class="resume-entry" *ngFor="let project of data.projects">
+          <strong>{{ project.name }} — {{ project.taglineKey | translate }}</strong>
+          <ul>
+            <li *ngFor="let bullet of (project.bulletsKey | translate)">{{ bullet }}</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="resume-block">
+        <h3>{{ 'resume.sections.education' | translate }}</h3>
+        <div class="resume-entry" *ngFor="let edu of data.education">
+          <p class="resume-edu-title">{{ edu.titleKey | translate }}</p>
+          <p class="resume-entry-sub">
+            {{ edu.institution }}, {{ edu.year }}<ng-container *ngIf="edu.ongoing"> ({{ 'resume.ongoing' | translate }})</ng-container><ng-container *ngIf="edu.honors"> — {{ 'resume.honors' | translate }}</ng-container>
+          </p>
+        </div>
+      </section>
+
+      <!-- LANGUAGES -->
+      <section class="resume-block">
+        <h3>{{ 'resume.sections.languages' | translate }}</h3>
+        <p>
+          <ng-container *ngFor="let lang of ('resume.languageItems' | translate); let last = last">
+            {{ lang.name }} – {{ lang.level }}<span *ngIf="!last">&nbsp;|&nbsp;</span>
+          </ng-container>
+        </p>
+      </section>
+
+      <!-- REFERENCE -->
+      <section class="resume-block">
+        <h3>{{ 'resume.sections.reference' | translate }}</h3>
+        <p>{{ 'resume.reference.note' | translate }}</p>
+      </section>
+
+      <!-- DOWNLOAD -->
+      <div class="resume-block resume-footer">
+        <button
+          type="button"
+          class="resume-download-btn"
+          [class.is-loading]="service.downloadState() === 'loading'"
+          [class.is-done]="service.downloadState() === 'done'"
+          [disabled]="service.downloadState() === 'loading'"
+          (click)="downloadResume()"
+          [attr.aria-label]="'resume.download.aria' | translate"
+        >
+          <span class="btn-inner">
+            <span class="btn-icon" aria-hidden="true">
+              <!-- Idle: document/download -->
+              <svg *ngIf="service.downloadState() === 'idle'" class="icon" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+
+              <!-- Loading: spinner -->
+              <svg *ngIf="service.downloadState() === 'loading'" class="icon spinner" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" opacity="0.25" />
+                <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+
+              <!-- Done: check -->
+              <svg *ngIf="service.downloadState() === 'done'" class="icon check" viewBox="0 0 24 24" fill="none">
+                <path class="check-path" d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+
+            <span class="btn-label">
+              <span *ngIf="service.downloadState() === 'idle'">{{ 'resume.download.idle' | translate }}</span>
+              <span *ngIf="service.downloadState() === 'loading'">{{ 'resume.download.loading' | translate }}</span>
+              <span *ngIf="service.downloadState() === 'done'">{{ 'resume.download.done' | translate }}</span>
+            </span>
+
+            <span class="btn-spark" aria-hidden="true"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

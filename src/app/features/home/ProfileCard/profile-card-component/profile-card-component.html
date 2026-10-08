@@ -1,0 +1,239 @@
+<div class="relative z-10 flex justify-center w-full">
+  <div
+    id="profile-card"
+   class="relative
+       bg-gradient-to-br from-[#FFFDF9] via-[#F4EDE4] to-[#EADDCB]
+       backdrop-blur-xl
+       rounded-3xl px-6 md:px-12 pt-32 pb-10
+       border border-gray-300
+       shadow-[0_40px_120px_-40px_rgba(212,175,55,0.35)]
+       will-change-transform
+       card-animate"
+
+    [class.card-assembled]="isVisible"
+    style="perspective:1200px"
+  >
+
+    <!-- CARD BORDER GRADIENT -->
+  <div
+  class="pointer-events-none absolute -inset-2 rounded-[30px]
+         bg-gradient-to-r
+         from-[#7A6C5F]/25
+         via-[#B89B6A]/30
+         to-[#7A6C5F]/25
+         blur-[0.75px]
+         "
+  [class.border-gradient-animate]="true"
+></div>
+
+
+    <!-- PROFILE IMAGE -->
+    <div class="absolute -top-28 md:-top-32 left-1/2 -translate-x-1/2 z-20">
+      <div class="relative w-64 h-64 profile-img-glow"
+           [class.glow-active]="glowActive">
+
+        <!-- ROTATING GRADIENT -->
+          <div
+            class="absolute inset-0 rounded-full
+                   bg-gradient-to-r
+                   from-[#ffffff]
+                   via-[#f5f5f5]
+                   to-[#ffffff]
+                   animate-spin-slow blur-[1px]
+                   profile-img-animate
+                   profile-img-mask-top"
+            [class.profile-img-animate]="true"
+          ></div>
+
+        <div
+          class="absolute inset-[6px] rounded-full
+                 border border-transparent
+                 profile-img-animate"
+          [class.profile-img-animate]="true"
+        ></div>
+
+        <img
+          [src]="imageSrc"
+          width="480" height="480"
+          fetchpriority="high"
+          decoding="async"
+          [attr.alt]="'profileCard.photoAlt' | translate"
+          class="absolute inset-[12px]
+                 w-[calc(100%-24px)] h-[calc(100%-24px)]
+                 rounded-full object-cover
+                 ring-8 ring-[#EFEAE4]
+                 shadow-xl profile-img-animate"
+          [class.profile-img-animate]="true"
+        />
+      </div>
+    </div>
+<!-- NAME -->
+<div class="relative mt-1 text-center">
+
+  <h1
+    class="text-3xl md:text-4xl font-extrabold
+           tracking-tight text-[#1A1A1A]"
+  >
+    <span class="name-text">{{ name }}</span>
+  </h1>
+
+  <div
+    class="mt-5 mb-5 h-px w-100 mx-auto
+           bg-gradient-to-r
+           from-transparent
+           via-[#ffffff]
+           to-transparent">
+  </div>
+</div>
+
+
+    <!-- DESCRIPTION + META -->
+    <div
+      class="mt-6 max-w-xl mx-auto text-center fade-in-delayed"
+      [class.fade-in-delayed]="isVisible"
+    >
+      <p
+        class="text-base md:text-lg
+               text-[#5C5248]
+               leading-relaxed
+               font-light"
+      >
+        {{ description }}
+      </p>
+
+      <div
+        class="mt-5 mb-5 h-px w-60 mx-auto
+               bg-gradient-to-r
+               from-transparent
+               via-[#ffffff]
+               to-transparent">
+      </div>
+
+      <div
+        class="flex justify-center items-center gap-2
+               text-sm font-medium
+               text-[#5C5248]
+               tracking-wide fade-in-delayed-2"
+        [class.fade-in-delayed-2]="isVisible"
+      >
+        <span class="opacity-80">🌎</span>
+        <span>{{ languages }}</span>
+      </div>
+
+      <div
+        class="mt-5 mb-5 h-px w-20 mx-auto
+               bg-gradient-to-r
+               from-transparent
+               via-[#ffffff]
+               to-transparent">
+      </div>
+    </div>
+
+    <!-- CONTACT BUTTONS -->
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+
+      <!-- EMAIL -->
+      <a
+        [href]="'mailto:' + email"
+        class="group flex items-center gap-3 px-5 py-2.5 rounded-full
+               text-sm font-medium
+               text-[#5C5248]
+               border border-[#B89B6A]/40
+               bg-[#F6F3EF]/80 backdrop-blur
+               hover:bg-[#B89B6A]
+               hover:text-white
+               hover:border-transparent
+               profile-btn">
+
+        <span class="icon-animate flex items-center justify-center w-[56px] h-[56px]
+                     bg-white rounded-full
+                     shadow-[0_4px_16px_rgba(0,0,0,0.16)]
+                     border-2 border-[#D8CBB8]">
+          <img src="assets/Videos/Email.webp" width="44" height="44" alt="" loading="lazy" />
+        </span>
+        {{ 'profileCard.email' | translate }}
+      </a>
+
+      <!-- WHATSAPP -->
+      <a
+        [href]="whatsapp"
+        target="_blank"
+        class="group flex items-center gap-3 px-5 py-2.5 rounded-full
+               text-sm font-medium
+               text-[#3B5A4A]
+               border border-[#9BB8A8]/50
+               bg-[#EFF6F2]/80
+               hover:bg-[#1F7A5B]
+               hover:text-white
+               hover:border-transparent
+               profile-btn">
+
+        <span class="icon-animate flex items-center justify-center w-[44px] h-[44px]
+                     bg-white rounded-full
+                     border-2 border-[#B7D4C5]">
+          <img src="assets/Videos/wasavideo.webp" width="32" height="32" alt="" loading="lazy" />
+        </span>
+        {{ 'profileCard.whatsapp' | translate }}
+      </a>
+
+      <!-- GITHUB -->
+      <a
+        [href]="github"
+        target="_blank"
+        class="group flex items-center gap-3 px-5 py-2.5 rounded-full
+               text-sm font-medium
+               text-[#2A2A2A]
+               border border-[#B0B0B0]/60
+               bg-[#F1F1F1]/80
+               hover:bg-[#1F2937]
+               hover:text-white
+               hover:border-transparent
+               profile-btn">
+
+        <span class="icon-animate flex items-center justify-center w-[56px] h-[56px]
+                     bg-white rounded-full
+                     border-2 border-[#D0D0D0]">
+          <img src="assets/Videos/Gitlogo.webp" width="44" height="44" alt="" loading="lazy" />
+        </span>
+        {{ 'profileCard.github' | translate }}
+      </a>
+
+      <!-- LINKEDIN -->
+      <a
+        [href]="linkedin"
+        target="_blank"
+        class="group flex items-center gap-3 px-5 py-2.5 rounded-full
+               text-sm font-medium
+               text-[#0A3D73]
+               border border-[#8FB4D9]/50
+               bg-[#EEF4FB]/80
+               hover:bg-[#0A66C2]
+               hover:text-white
+               hover:border-transparent
+               profile-btn">
+
+        <span class="icon-animate flex items-center justify-center w-[56px] h-[56px]
+                     bg-white rounded-full
+                     border-2 border-[#B5D0EA]">
+          <svg viewBox="0 0 24 24" width="28" height="28" class="fill-current" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569
+              c0-1.328-.027-3.037-1.852-3.037
+              -1.853 0-2.136 1.445-2.136 2.939
+              v5.667H9.351V9h3.414v1.561h.046
+              c.477-.9 1.637-1.85 3.37-1.85
+              3.601 0 4.267 2.37 4.267 5.455
+              v6.286zM5.337 7.433a2.062 2.062
+              0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM6.119
+              20.452H4.553V9h1.566v11.452zM22.225
+              0H1.771C.792 0 0 .774 0 1.727v20.545
+              C0 23.227.792 24 1.771 24h20.451
+              C23.2 24 24 23.227 24 22.273V1.727
+              C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </span>
+        {{ 'profileCard.linkedin' | translate }}
+      </a>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.profile-img-enhanced {
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.25), 0 0 16px 4px #60a5fa44;
+  /* border: 2px solid #fff; */
+  padding: 2px;
+  transition: box-shadow 0.3s;
+}
+
+.profile-img-enhanced:hover {
+  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.35), 0 0 24px 8px #60a5fa55;
+}

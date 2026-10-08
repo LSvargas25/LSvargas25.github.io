@@ -1,0 +1,165 @@
+<!-- styles moved to navbar.component.scss -->
+<!-- ================= BOTÓN TOGGLE NAVBAR ================= -->
+<button class="fixed top-6 right-6
+         w-12 h-12
+         rounded-full
+         flex items-center justify-center
+         navbar-toggle-btn
+         transition-all duration-500 ease-in-out
+         z-[1000]"
+         [ngClass]="{
+           'bg-gradient-to-br from-[#B89B6A] to-[#D4AF37] shadow-[0_10px_28px_-10px_rgba(184,155,106,0.65)] hover:shadow-[0_12px_32px_-10px_rgba(184,155,106,0.75)]': showNavbar,
+           'bg-transparent backdrop-blur-sm shadow-lg border-2 border-gray-700/60 hover:border-gray-800/80 hover:backdrop-blur-md': !showNavbar
+         }"
+         (click)="toggleNavbar()"
+         [attr.aria-label]="'nav.toggle' | translate"
+         [attr.aria-expanded]="showNavbar"
+         aria-controls="main-navbar">
+
+  <!-- CHEVRON UP (OCULTAR) -->
+  <svg *ngIf="showNavbar" class="navbar-chevron chevron-up text-white" width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <!-- CHEVRON DOWN (MOSTRAR) -->
+  <svg *ngIf="!showNavbar" class="navbar-chevron chevron-down text-black" width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+</button>
+
+
+<!-- ================= NAVBAR ================= -->
+<nav id="main-navbar" class="fixed top-0 left-0 w-full
+         border-b navbar-border
+         transition-all duration-500 ease-in-out"
+         [ngClass]="{
+           'z-50 bg-gradient-to-r from-[#FFFDF9]/80 via-[#F4EDE4]/80 to-[#EADDCB]/80 backdrop-blur-xl border-[#B89B6A]/30 shadow-[0_10px_32px_-16px_rgba(184,155,106,0.35)] translate-y-0 opacity-100': showNavbar,
+           'z-0 bg-[#e8e8e8]/20 backdrop-blur-0 border-transparent shadow-none -translate-y-full opacity-0 navbar-hidden-border pointer-events-none': !showNavbar
+         }">
+  <div class="navbar-inner max-w-5xl mx-auto flex items-center justify-between gap-3 h-20">
+
+    <!-- PERFIL -->
+    <div class="flex items-center gap-3 lg:gap-4 whitespace-nowrap min-w-0">
+
+      <!-- FOTO -->
+      <div class="relative w-12 h-12 lg:w-16 lg:h-16 shrink-0 group">
+        <div class="absolute inset-0 rounded-full
+                 bg-[#D4AF37]/20 blur-xl
+                 opacity-70 group-hover:opacity-100
+                 transition-opacity duration-500">
+        </div>
+
+        <img src="assets/images/principal-160.webp" width="64" height="64" alt="Luis Steven Vargas" class="relative w-full h-full rounded-full object-cover
+                 border border-[#B89B6A]/40
+                 shadow-[0_6px_20px_-6px_rgba(184,155,106,0.55)]
+                 transition-transform duration-300
+                 group-hover:scale-105" />
+      </div>
+
+      <!-- NOMBRE -->
+      <span class="truncate min-w-0 text-base sm:text-lg md:text-xl font-semibold tracking-tight
+               bg-gradient-to-r from-[#6F6256] via-[#B89B6A] to-[#6F6256]
+               bg-clip-text text-transparent
+               transition-all duration-300
+               opacity-100" [class.reluzca]="highlightProfile">
+        Luis Steven Vargas
+      </span>
+
+    </div>
+
+    <!-- DIVISOR -->
+    <div class="hidden lg:block h-8 w-px bg-[#B89B6A]/30"></div>
+
+    <!-- MENU + LANG (desktop) -->
+    <div class="hidden lg:flex items-center gap-6">
+      <ul class="flex items-center gap-10 text-base whitespace-nowrap">
+        <li *ngFor="let section of sections">
+          <a href="#{{ section.id }}" (click)="$event.preventDefault(); scrollToSection(section.id)"
+            class="relative inline-block font-medium navbar-link" [class.active]="isActive(section.id)">
+            <span class="navbar-text">
+              {{ section.labelKey | translate }}
+            </span>
+
+            <!-- UNDERLINE (solo ACTIVE) -->
+            <span class="navbar-underline" [class.active]="isActive(section.id)"></span>
+          </a>
+        </li>
+      </ul>
+
+      <ng-container *ngTemplateOutlet="langSwitch"></ng-container>
+      <ng-container *ngTemplateOutlet="resumeButton"></ng-container>
+    </div>
+
+    <!-- MENU BUTTON (mobile / tablet) -->
+    <button #menuButton
+            type="button"
+            class="navbar-menu-btn lg:hidden"
+            (click)="toggleMenu()"
+            [attr.aria-expanded]="menuOpen"
+            aria-controls="mobile-menu"
+            [attr.aria-label]="(menuOpen ? 'nav.closeMenu' : 'nav.openMenu') | translate">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+        <path *ngIf="!menuOpen" d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <path *ngIf="menuOpen" d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- MOBILE MENU PANEL -->
+  <div #mobileMenu
+       id="mobile-menu"
+       class="navbar-mobile-menu lg:hidden"
+       [class.open]="menuOpen"
+       [attr.aria-hidden]="!menuOpen"
+       [attr.inert]="menuOpen ? null : ''">
+    <ul class="mobile-links">
+      <li *ngFor="let section of sections">
+        <a href="#{{ section.id }}" (click)="$event.preventDefault(); scrollToSection(section.id)"
+           class="mobile-link" [class.active]="isActive(section.id)"
+           [attr.aria-current]="isActive(section.id) ? 'true' : null">
+          {{ section.labelKey | translate }}
+        </a>
+      </li>
+    </ul>
+    <div class="mobile-actions">
+      <ng-container *ngTemplateOutlet="langSwitch"></ng-container>
+      <ng-container *ngTemplateOutlet="resumeButton"></ng-container>
+    </div>
+  </div>
+</nav>
+
+<!-- Shared by the desktop bar and the mobile panel -->
+<ng-template #langSwitch>
+  <div class="lang-switch">
+    <button
+      *ngFor="let lang of languages"
+      type="button"
+      class="lang-btn"
+      [class.active]="currentLang === lang.code"
+      (click)="setLanguage(lang.code)"
+      [attr.aria-label]="lang.labelKey | translate"
+      [attr.aria-pressed]="currentLang === lang.code"
+      [attr.title]="lang.labelKey | translate">
+      <span class="flag" aria-hidden="true">{{ lang.flag }}</span>
+      <span class="lang-code">{{ lang.code | uppercase }}</span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #resumeButton>
+  <!-- RESUME: always reachable, opens the same CV sheet as the sticky note -->
+  <button
+    type="button"
+    class="navbar-resume-btn"
+    (click)="openResume($any($event.currentTarget))"
+    [attr.aria-label]="'note.resumeAria' | translate"
+    aria-haspopup="dialog">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+      <path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M14 3v4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      <path d="M9 12.5h6M9 15.8h6M9 9.2h2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+    <span class="navbar-resume-label">{{ 'note.button.resume' | translate }}</span>
+  </button>
+</ng-template>

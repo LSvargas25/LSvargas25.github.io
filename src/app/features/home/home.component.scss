@@ -1,0 +1,144 @@
+/* ======================================================
+   SECTION BASE – the only place that sets vertical section padding.
+   Tokens live in styles.scss (:root). Inner components add no
+   vertical padding of their own.
+====================================================== */
+.section-base {
+  position: relative;
+  /* z-index removed: was creating a stacking context that trapped modals */
+  background: transparent;
+  /* Top padding only, so consecutive sections are exactly one
+     --section-py apart (top + bottom used to stack to 2×). */
+  padding-block: var(--section-py) 0;
+  /* html already adds scroll-padding-top: var(--nav-h); this cancels the
+     section padding so anchor jumps land the title 2rem below the navbar */
+  scroll-margin-top: calc(2rem - var(--section-py));
+}
+
+/* The last section closes the rhythm before the footer */
+.section-base:last-of-type {
+  padding-bottom: var(--section-py);
+}
+
+.hero-section {
+  /* <main> already reserves var(--nav-h) as top padding, so the hero fills exactly one screen */
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100svh - var(--nav-h));
+  padding: 2rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: none;
+
+  position: relative;
+  isolation: isolate; /* 👈 CLAVE */
+}
+
+.hero-content {
+  max-width: 100%;
+}
+
+/* Profile card relative */
+app-profile-card {
+  position: relative;
+  z-index: 10;
+}
+
+/* Card + sticky note share one box, so the note can be placed relative to the
+   photo: the photo is centred, 16rem wide and floats 8rem above the card
+   (profile-card: absolute -top-32, w-64). */
+.hero-card-anchor {
+  position: relative;
+  width: 100%;
+  /* The photo floats above the card (absolute: -top-28, md:-top-32), so layout
+     ignores it; reserve that overhang so it never covers the title/subtitle. */
+  padding-top: 7rem;
+  --hero-photo-top: 0rem; /* photo top relative to this box (reserved above) */
+}
+
+@media (min-width: 768px) {
+  .hero-card-anchor {
+    padding-top: 8rem;
+  }
+}
+
+.hero-note {
+  position: absolute;
+  z-index: 20;
+  /* right of the photo: centre + photo radius + gap */
+  left: calc(50% + 8rem + 1.5rem);
+  /* pinned near the photo's top edge */
+  top: calc(var(--hero-photo-top) + 0.75rem);
+}
+
+/* #profile, #experience, #projects and #contact size to their content:
+   a forced min-height: 100vh only pushed empty space below each section. */
+
+/* ======================================================
+   FULL-PAGE (desktop slides) – html.fp-on is set by FullPageScrollService
+   only at >= 1024px wide and >= 650px tall. Each section becomes one
+   screen under the navbar with its content vertically centred.
+====================================================== */
+:host-context(html.fp-on) {
+  .hero-section {
+    padding-block: var(--fp-slide-py);
+  }
+
+  .section-base:not(.hero-section) {
+    min-height: calc(100svh - var(--nav-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: var(--fp-slide-py);
+    scroll-margin-top: 0;
+  }
+
+  /* The hero photo floats 8rem above the profile card (absolute, -top-32), so
+     layout ignores it and it overlapped the title on short screens. Reserve
+     that overhang, and step the card (and its sticky note) down with zoom
+     (which, unlike transform, shrinks the layout box) so the hero fits. */
+  .hero-card-anchor {
+    padding-top: 8rem;
+    --hero-photo-top: 0rem;
+  }
+
+  @media (max-height: 870px) { .hero-card-anchor { zoom: 0.95; } }
+  @media (max-height: 838px) { .hero-card-anchor { zoom: 0.9; } }
+  @media (max-height: 806px) { .hero-card-anchor { zoom: 0.82; } }
+  @media (max-height: 767px) { .hero-card-anchor { zoom: 0.78; } }
+  @media (max-height: 729px) { .hero-card-anchor { zoom: 0.7; } }
+  @media (max-height: 677px) { .hero-card-anchor { zoom: 0.65; } }
+
+  /* Last slide = Contact + Footer: Contact takes what the footer leaves */
+  #contact {
+    min-height: calc(100svh - var(--nav-h) - var(--footer-h, 0px));
+  }
+}
+
+.section-divider {
+  border-top: none;
+}
+
+section > * {
+  position: relative;
+  /* z-index removed: was creating stacking contexts on section children (e.g. app-projects-component), trapping modals */
+}
+
+
+/* ======================================================
+   RESPONSIVE AJUSTES
+====================================================== */
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #hero-im,
+  #hero-typewriter-wrap {
+    text-align: center;
+  }
+}

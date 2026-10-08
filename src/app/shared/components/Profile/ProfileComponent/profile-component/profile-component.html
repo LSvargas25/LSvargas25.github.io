@@ -1,0 +1,97 @@
+<section class="relative bg-transparent">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- PROFILE CARD -->
+    <div class="profile-card relative
+             bg-white/80 backdrop-blur-xl
+             rounded-3xl px-8 py-8
+             border border-[#D6C2A6]/40
+             overflow-visible">
+
+      <!-- soft glow -->
+      <div class="pointer-events-none absolute -inset-2 rounded-[32px]
+               bg-gradient-to-r from-[#CBB994]/15 via-[#E4D3A2]/15 to-[#B89B6A]/15
+               blur-2xl">
+      </div>
+
+      <div class="card-texture"></div>
+
+      <div class="relative flex flex-col lg:flex-row gap-8 items-start">
+
+        <!-- LEFT: PHOTO -->
+        <div class="flex-shrink-0 mx-auto lg:mx-0">
+          <div class="profile-photo-slot">
+            <div class="profile-photo-glow"></div>
+            <div class="profile-photo-ring"></div>
+            <img src="assets/images/papi-600.webp" width="600" height="600" alt="Luis Steven Vargas Rodríguez" class="profile-photo" loading="lazy" decoding="async" />
+          </div>
+        </div>
+
+        <!-- RIGHT: CONTENT -->
+        <div class="flex-1 relative z-10 w-full">
+
+          <!-- HEADER -->
+          <div class="text-center lg:text-left mb-6 profile-header">
+
+            <div class="profile-header">
+              <h2 class="profile-title">
+                {{ 'profile.title' | translate }}
+                <span class="profile-line"></span>
+              </h2>
+            </div>
+
+            <p class="profile-description text-center">
+              {{ 'profile.description.intro' | translate }}
+              <span class="accent">{{ 'profile.description.emphasis1' | translate }}</span>,
+              {{ 'profile.description.mid' | translate }}
+              <span class="accent">{{ 'profile.description.emphasis2' | translate }}</span>,
+              {{ 'profile.description.and' | translate }}
+              <span class="accent">{{ 'profile.description.emphasis3' | translate }}</span>
+            </p>
+          </div>
+          <div class="mt-5 mb-5 h-px w-full mx-auto
+         bg-gradient-to-r
+         from-transparent
+         via-[rgba(201,164,92,0.3)]
+         to-transparent">
+          </div>
+
+          <!-- SKILLS: categories wrap into balanced rows; each logo appears once -->
+          <div class="skills-wrapper">
+            @for (category of categories; track category.id) {
+              <section class="skill-column" [style.--count]="category.items.length"
+                       [attr.aria-labelledby]="'skills-' + category.id">
+                <h3 class="skill-title" [id]="'skills-' + category.id">{{ category.labelKey | translate }}</h3>
+                <ul class="skills-grid" role="list">
+                  @for (skill of category.items; track skill.name; let i = $index) {
+                    <!-- The list keeps list semantics; the focusable logo inside carries the name -->
+                    <li class="skill-item">
+                      <span class="skill-icon tech" tabindex="0" role="img"
+                            [attr.aria-label]="skill.name" [attr.data-label]="skill.name"
+                            [style.animation-delay]="(i * 60) + 'ms'">
+                        <img [src]="skill.icon" alt="" aria-hidden="true" loading="lazy" width="24" height="24" />
+                      </span>
+                    </li>
+                  }
+                </ul>
+              </section>
+            }
+          </div>
+
+          <!-- SOFT SKILLS: plain text chips, no logos -->
+          <div class="soft-skills-section">
+            <h3 class="skill-title text-center">
+              {{ 'profile.softSkills.title' | translate }}
+            </h3>
+            <ul class="soft-skills-list" role="list">
+              @for (soft of asList(softSkillsKey | translate); track $index) {
+                <li class="soft-chip">{{ soft }}</li>
+              }
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
